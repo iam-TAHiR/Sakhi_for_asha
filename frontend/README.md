@@ -2,11 +2,16 @@
 
 A browser-based voice-assisted visit dashboard built with HTML, CSS, and JavaScript.
 
-## Sign in
+## Demo sign in
 
-Create a local account from the sign-in page, then use the workspace tabs to open the dashboard, new visit, voice notes, visit records, or emergency flags. Visit details and voice transcripts stay in the shared draft while switching between the New visit and Voice notes tabs.
+The login page accepts this demo credential:
 
-The sign-in flow is a local demo for this browser only. Account details and password hashes are stored in browser storage; there is no server, account recovery, synchronization, or production-grade access control. Do not use this demo to protect real patient data or treat local sign-in as a secure boundary.
+- **Demo ID:** `asha-demo`
+- **Password:** `Sakhi@123`
+
+After signing in, use the workspace tabs to open the dashboard, new visit, voice notes, visit records, or emergency flags. Visit details and voice transcripts stay in the shared draft while switching between the New visit and Voice notes tabs.
+
+This credential is embedded in the frontend and is not secure authentication. There is no server, account recovery, or synchronization. Do not use this demo to protect or store real patient information.
 
 ## Run locally
 

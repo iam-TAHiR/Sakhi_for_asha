@@ -32,27 +32,20 @@
             <span class="brand-mark" aria-hidden="true">s</span>
             <span><strong>Welcome to Sakhi</strong><small>Your ASHA field workspace</small></span>
           </div>
-          <div class="auth-tabs" role="tablist" aria-label="Account options">
-            <button type="button" class="auth-tab active" id="login-tab" role="tab" aria-selected="true" aria-controls="login-panel">Sign in</button>
-            <button type="button" class="auth-tab" id="signup-tab" role="tab" aria-selected="false" aria-controls="signup-panel">Create account</button>
-          </div>
-          <form id="login-form" class="auth-form" role="tabpanel" aria-labelledby="login-tab">
-            <h1>Good to see you again</h1>
+          <form id="login-form" class="auth-form">
+            <h1>Welcome back</h1>
             <p class="auth-description">Sign in to open your field workspace.</p>
-            <label class="field" for="login-email"><span>Email address</span><input id="login-email" type="email" autocomplete="username" placeholder="you@example.com" required></label>
-            <label class="field" for="login-password"><span>Password</span><input id="login-password" type="password" autocomplete="current-password" placeholder="Enter your password" required></label>
+            <label class="field" for="login-id"><span>Demo ID</span><input id="login-id" type="text" autocomplete="username" value="asha-demo" required></label>
+            <label class="field" for="login-password"><span>Password</span><input id="login-password" type="password" autocomplete="current-password" value="Sakhi@123" required></label>
             <button class="button button-primary auth-submit" type="submit">Sign in <span aria-hidden="true">→</span></button>
           </form>
-          <form id="signup-form" class="auth-form" role="tabpanel" aria-labelledby="signup-tab" hidden>
-            <h1>Create your account</h1>
-            <p class="auth-description">Set up your personal Sakhi workspace.</p>
-            <label class="field" for="signup-name"><span>Your name</span><input id="signup-name" autocomplete="name" placeholder="Enter your name" required></label>
-            <label class="field" for="signup-email"><span>Email address</span><input id="signup-email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
-            <label class="field" for="signup-password"><span>Create password <span class="optional">(at least 8 characters)</span></span><input id="signup-password" type="password" autocomplete="new-password" minlength="8" placeholder="Choose a password" required></label>
-            <button class="button button-primary auth-submit" type="submit">Create account <span aria-hidden="true">→</span></button>
-          </form>
           <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
-          <p class="auth-notice"><span aria-hidden="true">◈</span> Demo sign-in is stored in this browser only. It is not a secure server account.</p>
+          <div class="demo-credentials" aria-label="Demo login credentials">
+            <strong>Demo login</strong>
+            <span><span>ID</span><code>asha-demo</code></span>
+            <span><span>Password</span><code>Sakhi@123</code></span>
+          </div>
+          <p class="auth-notice"><span aria-hidden="true">◈</span> Demo access only. This login is built into the app and is not secure authentication. Do not enter real patient information.</p>
         </div>
       </section>
     </main>

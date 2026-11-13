@@ -4,9 +4,14 @@
   const DB_NAME = "sakhi-field-notes";
   const DB_VERSION = 2;
   const STORE_NAME = "visits";
-  const ACCOUNTS_KEY = "sakhi-local-accounts";
   const SESSION_KEY = "sakhi-current-user";
-  const ACCOUNT_HASH_ITERATIONS = 120000;
+  const DEMO_ID = "asha-demo";
+  const DEMO_PASSWORD = "Sakhi@123";
+  const DEMO_ACCOUNT = {
+    id: "demo-asha-worker",
+    name: "ASHA Worker",
+    email: "asha-demo",
+  };
   const EMERGENCY_TERMS = [
     "emergency",
     "unconscious",
@@ -130,34 +135,6 @@
       transaction.onerror = () => reject(transaction.error || new Error("Could not delete this visit."));
       transaction.onabort = () => reject(transaction.error || new Error("This visit does not belong to the signed-in account."));
     });
-  }
-
-  function readAccounts() {
-    const storedAccounts = localStorage.getItem(ACCOUNTS_KEY);
-    if (!storedAccounts) return [];
-    const accounts = JSON.parse(storedAccounts);
-    if (!Array.isArray(accounts)) throw new Error("Saved accounts could not be read. Clear this browser's Sakhi account data and sign up again.");
-    return accounts;
-  }
-
-  function toBase64(bytes) {
-    return btoa(String.fromCharCode(...bytes));
-  }
-
-  function fromBase64(value) {
-    return Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
-  }
-
-  async function hashPassword(password, salt) {
-    if (!globalThis.crypto?.subtle) throw new Error("Account sign-in requires a secure browser context. Open Sakhi through localhost or HTTPS.");
-    const keyMaterial = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
-    const bits = await crypto.subtle.deriveBits({
-      name: "PBKDF2",
-      salt,
-      iterations: ACCOUNT_HASH_ITERATIONS,
-      hash: "SHA-256",
-    }, keyMaterial, 256);
-    return new Uint8Array(bits);
   }
 
   function accountInitial(name) {
@@ -638,75 +615,24 @@
   }
 
   function initialize() {
-    const loginTab = document.querySelector("#login-tab");
-    const signupTab = document.querySelector("#signup-tab");
     const loginForm = document.querySelector("#login-form");
-    const signupForm = document.querySelector("#signup-form");
-    const changeAuthTab = (showSignup) => {
-      loginForm.hidden = showSignup;
-      signupForm.hidden = !showSignup;
-      loginTab.classList.toggle("active", !showSignup);
-      signupTab.classList.toggle("active", showSignup);
-      loginTab.setAttribute("aria-selected", String(!showSignup));
-      signupTab.setAttribute("aria-selected", String(showSignup));
-      authMessage.textContent = "";
-      authMessage.classList.remove("error");
-    };
-    loginTab.addEventListener("click", () => changeAuthTab(false));
-    signupTab.addEventListener("click", () => changeAuthTab(true));
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (!loginForm.reportValidity()) return;
-      showAuthMessage("Checking your account…", false);
+      const demoId = document.querySelector("#login-id").value.trim().toLocaleLowerCase();
+      const password = document.querySelector("#login-password").value;
+      if (demoId !== DEMO_ID || password !== DEMO_PASSWORD) {
+        showAuthMessage("The Demo ID or password is incorrect. Use the credentials shown below.");
+        return;
+      }
+      showAuthMessage("Signing in…", false);
       try {
-        const email = document.querySelector("#login-email").value.trim().toLocaleLowerCase();
-        const password = document.querySelector("#login-password").value;
-        const account = readAccounts().find((item) => item.email === email);
-        if (!account) {
-          showAuthMessage("We couldn't find an account with that email. Check it or create an account.");
-          return;
-        }
-        const passwordHash = await hashPassword(password, fromBase64(account.salt));
-        if (toBase64(passwordHash) !== account.passwordHash) {
-          showAuthMessage("That password doesn't match this account. Please try again.");
-          return;
-        }
         loginForm.reset();
-        await startSession(account);
+        document.querySelector("#login-id").value = DEMO_ID;
+        await startSession(DEMO_ACCOUNT);
       } catch (error) {
         console.error("Could not sign in.", error);
         showAuthMessage(error.message || "Could not sign in. Please try again.");
-      }
-    });
-    signupForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      if (!signupForm.reportValidity()) return;
-      showAuthMessage("Creating your account…", false);
-      try {
-        const name = document.querySelector("#signup-name").value.trim();
-        const email = document.querySelector("#signup-email").value.trim().toLocaleLowerCase();
-        const accounts = readAccounts();
-        if (accounts.some((account) => account.email === email)) {
-          showAuthMessage("An account with that email already exists. Sign in instead.");
-          return;
-        }
-        const salt = crypto.getRandomValues(new Uint8Array(16));
-        const passwordHash = await hashPassword(document.querySelector("#signup-password").value, salt);
-        const account = {
-          id: globalThis.crypto?.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`,
-          name,
-          email,
-          salt: toBase64(salt),
-          passwordHash: toBase64(passwordHash),
-        };
-        accounts.push(account);
-        localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
-        signupForm.reset();
-        await startSession(account);
-        showToast("Your local Sakhi account is ready.");
-      } catch (error) {
-        console.error("Could not create an account.", error);
-        showAuthMessage(error.message || "Could not create an account. Check your browser storage and try again.");
       }
     });
     document.querySelectorAll(".nav-link[data-page], [data-go]").forEach((button) => {
@@ -729,7 +655,6 @@
       sessionStorage.removeItem(SESSION_KEY);
       appShell.hidden = true;
       authScreen.hidden = false;
-      changeAuthTab(false);
     });
     recordButton.addEventListener("click", () => {
       if (mediaRecorder?.state === "recording") stopRecording();
