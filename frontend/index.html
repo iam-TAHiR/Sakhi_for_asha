@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#2B66FF">
+  <title>SAKHI — AI Health Assistant for ASHA Workers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-sakhi">
+
+  <!-- Desktop App Shell Layout -->
+  <div class="app-layout" id="appLayout">
+
+    <!-- Desktop Sidebar (visible >= 1024px) -->
+    <aside class="desktop-sidebar" id="desktopSidebar">
+      <div class="desktop-brand">
+        <div class="brand-badge-icon brand-woman-avatar">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23D4F4E4'/><circle cx='50' cy='38' r='18' fill='%23F4B58A'/><path d='M30 36 C30 20 70 20 70 36 C70 48 64 54 64 54 L36 54 Z' fill='%231F2937'/><path d='M20 94 C24 64 38 60 50 60 C62 60 76 64 80 94 Z' fill='%23FFFFFF'/><path d='M35 60 L65 94 L80 94 L50 60 Z' fill='%23F04D79'/><circle cx='50' cy='34' r='2' fill='%23DC2626'/></svg>" alt="SAKHI">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">SAKHI</span>
+          <span class="brand-sub">Health Assistant</span>
+        </div>
+      </div>
+
+      <div class="desktop-profile-card" onclick="sakhiApp.navigateTo('profile')">
+        <div class="avatar-small">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23DCE7FE'/><circle cx='50' cy='36' r='20' fill='%23F4B58A'/><path d='M30 32 C30 18 70 18 70 32 C70 42 66 48 66 48 L34 48 Z' fill='%231F2937'/><path d='M22 92 C24 66 38 58 50 58 C62 58 76 66 78 92 Z' fill='%232B66FF'/><path d='M44 58 L56 58 L54 78 L46 78 Z' fill='%23FFFFFF'/></svg>" alt="ASHA Worker">
+        </div>
+        <div class="desktop-profile-info">
+          <span class="name">Arunima Raj</span>
+          <span class="role">ASHA Field Worker</span>
+        </div>
+      </div>
+
+      <nav class="desktop-nav">
+        <button class="nav-item active" data-nav="home" onclick="sakhiApp.navigateTo('home')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          <span>Home</span>
+        </button>
+        <button class="nav-item" data-nav="visits" onclick="sakhiApp.navigateTo('visits')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 11 12 14 22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+          <span>Visits</span>
+        </button>
+        <button class="nav-item" data-nav="followups" onclick="sakhiApp.navigateTo('followups')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span>Follow-ups</span>
+        </button>
+        <button class="nav-item" data-nav="alerts" onclick="sakhiApp.navigateTo('alerts')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <span>Alerts</span>
+        </button>
+        <button class="nav-item" data-nav="maternal-list" onclick="sakhiApp.navigateTo('maternal-list')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 11l2 2 4-4"/></svg>
+          <span>Maternal Health</span>
+        </button>
+        <button class="nav-item" data-nav="vaccine-list" onclick="sakhiApp.navigateTo('vaccine-list')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 2 4 4"/><path d="m17 7 3-3"/><path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5"/><path d="m9 11 4 4"/><path d="m5 19-3 3"/><path d="m14 4 6 6"/></svg>
+          <span>Vaccine Tracker</span>
+        </button>
+        <button class="nav-item" data-nav="nearby-facilities" onclick="sakhiApp.navigateTo('nearby-facilities')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18"/>
+            <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/>
+            <path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/>
+            <line x1="10" y1="9" x2="14" y2="9"/>
+            <line x1="12" y1="7" x2="12" y2="11"/>
+          </svg>
+          <span>Nearby Clinics & Hospitals</span>
+        </button>
+        <button class="nav-item" data-nav="chat" onclick="sakhiApp.navigateTo('chat')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>AI Chatbot</span>
+        </button>
+        <button class="nav-item" data-nav="profile" onclick="sakhiApp.navigateTo('profile')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>My Profile</span>
+        </button>
+      </nav>
+
+      <div class="desktop-footer">
+        <button class="btn-sidebar-logout" onclick="sakhiApp.logout()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Desktop Content Area (Holds Toolbar + Canvas) -->
+    <div class="desktop-content-area" id="desktopContentArea">
+
+      <!-- Desktop Top Toolbar (Judges View Switcher: Mobile Frame vs Desktop Full View) -->
+      <header class="desktop-top-toolbar" id="desktopTopToolbar">
+        <div class="toolbar-left">
+          <div class="breadcrumb-trail">
+            <span class="crumb-root">SAKHI Register</span>
+            <span class="crumb-divider">/</span>
+            <span class="crumb-current" id="crumbCurrentScreen">Home</span>
+          </div>
+          <span class="phc-tag">ASHA Health Portal</span>
+        </div>
+
+        <div class="toolbar-right">
+          <!-- View Switcher Group -->
+          <div class="view-mode-toggle-group">
+            <span class="toggle-label-hint">View Mode:</span>
+            <button class="btn-mode-toggle" id="btnModeMobile" onclick="sakhiApp.setViewMode('mobile')" title="Mobile Android App View">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              <span>Mobile View</span>
+            </button>
+            <button class="btn-mode-toggle active" id="btnModeDesktop" onclick="sakhiApp.setViewMode('desktop')" title="Expanded Full Desktop View">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>Desktop View</span>
+            </button>
+          </div>
+
+          <!-- Mobile Device Width Presets (Active in mobile mode) -->
+          <div class="device-presets-group" id="devicePresetsGroup">
+            <button class="btn-preset active" data-width="390" onclick="sakhiApp.setDeviceWidth(390)" title="iPhone 14 / Pixel 7">390px</button>
+            <button class="btn-preset" data-width="360" onclick="sakhiApp.setDeviceWidth(360)" title="Android Compact">360px</button>
+            <button class="btn-preset" data-width="430" onclick="sakhiApp.setDeviceWidth(430)" title="Large Phone">430px</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Mobile & Desktop Content Canvas -->
+      <main class="app-canvas" id="appCanvas">
+
+      <!-- ============================================================
+           1. LOGIN SCREEN (Matches screenshot media_1795280797969_dc19553e)
+           ============================================================ -->
+      <section class="screen-view active" id="screen-login">
+        <div class="login-container">
+          <!-- Illustration Header -->
+          <div class="login-illustration-wrap">
+            <svg class="login-illustration-svg" viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Soft background sky & sun -->
+              <rect width="360" height="220" fill="#F4F8FF"/>
+              <circle cx="180" cy="110" r="100" fill="#EBF3FF"/>
+              
+              <!-- Distant hills and trees -->
+              <path d="M0 190 Q90 140 180 180 T360 170 L360 220 L0 220 Z" fill="#D7EDDF"/>
+              <path d="M0 195 Q100 165 220 195 T360 190 L360 220 L0 220 Z" fill="#C3E6D0"/>
+
+              <!-- Health Center Clinic Building -->
+              <rect x="220" y="140" width="55" height="42" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+              <polygon points="215,140 247,118 280,140" fill="#E2E8F0"/>
+              <rect x="238" y="156" width="18" height="26" fill="#3B82F6"/>
+              <!-- Red cross on clinic -->
+              <circle cx="247" cy="132" r="7" fill="#EF4444"/>
+              <path d="M247 128 V136 M243 132 H251" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+
+              <!-- Trees & Foliage -->
+              <circle cx="50" cy="160" r="24" fill="#A7D7B5"/>
+              <circle cx="75" cy="170" r="18" fill="#88C79C"/>
+              <circle cx="300" cy="165" r="22" fill="#A7D7B5"/>
+
+              <!-- ASHA Worker Character (Front/Center) -->
+              <!-- Body / Clothes (Blue Salwar Kameez) -->
+              <path d="M130 145 C115 155 105 185 105 220 L185 220 C185 185 175 155 160 145 Z" fill="#2B66FF"/>
+              <!-- White Lab Coat / Stole (Duputta) -->
+              <path d="M125 155 C120 180 120 205 122 220 L138 220 C136 200 136 175 140 160 Z" fill="#FFFFFF"/>
+              <path d="M165 155 C170 180 170 205 168 220 L152 220 C154 200 154 175 150 160 Z" fill="#FFFFFF"/>
+              <!-- ID Card Lanyard -->
+              <path d="M136 142 L145 170 L154 142" stroke="#2563EB" stroke-width="1.5" fill="none"/>
+              <rect x="140" y="170" width="10" height="14" rx="2" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1"/>
+              <rect x="142" y="174" width="6" height="2" fill="#2563EB"/>
+
+              <!-- Neck & Face -->
+              <rect x="141" y="130" width="8" height="12" fill="#F6BE97"/>
+              <ellipse cx="145" cy="116" rx="14" ry="16" fill="#F6BE97"/>
+              <!-- Hair -->
+              <path d="M131 114 C131 96 159 96 159 114 C159 126 156 132 156 132 C154 122 150 114 145 114 C140 114 136 122 134 132 Z" fill="#1E293B"/>
+              <path d="M131 110 C133 124 133 138 128 145" stroke="#1E293B" stroke-width="4" stroke-linecap="round"/>
+              <!-- Face details: eyes, smile, bindi -->
+              <circle cx="145" cy="110" r="1.2" fill="#DC2626"/> <!-- Bindi -->
+              <ellipse cx="140" cy="114" rx="1.5" ry="1.2" fill="#1E293B"/>
+              <ellipse cx="150" cy="114" rx="1.5" ry="1.2" fill="#1E293B"/>
+              <path d="M142 121 Q145 124 148 121" stroke="#C2410C" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+
+              <!-- Hands holding smartphone -->
+              <path d="M152 170 C158 165 168 175 165 185 L158 190" fill="#F6BE97"/>
+              <rect x="156" y="152" width="16" height="28" rx="3" fill="#1E293B" transform="rotate(-15 156 152)"/>
+              <rect x="158" y="154" width="12" height="24" rx="2" fill="#60A5FA" transform="rotate(-15 156 152)"/>
+
+              <!-- Cute Robot Mascot Speech Bubble -->
+              <g transform="translate(195, 68)">
+                <!-- Speech bubble background -->
+                <rect x="0" y="0" width="64" height="56" rx="16" fill="#22C55E"/>
+                <path d="M12 55 L2 66 L22 55 Z" fill="#22C55E"/>
+                
+                <!-- Robot Head inside bubble -->
+                <rect x="12" y="10" width="40" height="34" rx="10" fill="#FFFFFF"/>
+                <rect x="8" y="20" width="4" height="12" rx="2" fill="#FFFFFF"/>
+                <rect x="52" y="20" width="4" height="12" rx="2" fill="#FFFFFF"/>
+                <!-- Robot Antenna -->
+                <circle cx="32" cy="7" r="3" fill="#FFFFFF"/>
+                <line x1="32" y1="7" x2="32" y2="10" stroke="#FFFFFF" stroke-width="2"/>
+                <!-- Robot Eyes (Happy green eyes) -->
+                <circle cx="24" cy="24" r="3.5" fill="#22C55E"/>
+                <circle cx="40" cy="24" r="3.5" fill="#22C55E"/>
+                <circle cx="25" cy="23" r="1.2" fill="#FFFFFF"/>
+                <circle cx="41" cy="23" r="1.2" fill="#FFFFFF"/>
+                <!-- Robot Smile -->
+                <path d="M26 33 Q32 38 38 33" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Login Title Header -->
+          <div class="login-header-text">
+            <h1 class="login-app-title">AI Health Assistant</h1>
+            <h2 class="login-app-subtitle">for ASHA Workers</h2>
+            <p class="login-tagline">Empowering Rural Healthcare</p>
+          </div>
+
+          <!-- Login Form Card -->
+          <form class="login-form" id="loginForm" onsubmit="sakhiApp.handleLogin(event)">
+            <!-- Phone Number Input -->
+            <div class="input-field-wrap">
+              <span class="input-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </span>
+              <input type="tel" id="loginPhone" class="auth-input" placeholder="Phone Number" value="9876543210" required>
+            </div>
+
+            <!-- Password Input -->
+            <div class="input-field-wrap">
+              <span class="input-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </span>
+              <input type="password" id="loginPassword" class="auth-input" placeholder="Password" value="••••••••" required>
+              <button type="button" class="btn-toggle-eye" onclick="sakhiApp.togglePasswordVisibility('loginPassword', this)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Forgot Password Link -->
+            <div class="forgot-pass-wrap">
+              <a href="javascript:void(0)" class="forgot-link" onclick="sakhiApp.showToast('Reset password link sent to registered mobile!')">Forgot Password?</a>
+            </div>
+
+            <!-- Login Primary Action -->
+            <button type="submit" class="btn-primary-blue btn-login-action">Login</button>
+
+            <!-- OR Divider -->
+            <div class="or-divider">
+              <span class="line"></span>
+              <span class="text">OR</span>
+              <span class="line"></span>
+            </div>
+
+            <!-- New User Sign Up -->
+            <button type="button" class="btn-secondary-outline btn-signup-action" onclick="sakhiApp.showToast('Contact Primary Health Centre Admin to register new ASHA credentials.')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B66FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="8.5" cy="7" r="4"/>
+                <line x1="20" y1="8" x2="20" y2="14"/>
+                <line x1="23" y1="11" x2="17" y2="11"/>
+              </svg>
+              <span>New User? Sign Up</span>
+            </button>
+          </form>
+
+          <!-- Bottom Green Foliage Landscape -->
+          <div class="login-bottom-landscape">
+            <svg viewBox="0 0 360 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M-10 80 C80 30 200 40 370 70 L370 80 L-10 80 Z" fill="#D6F2DE"/>
+              <path d="M-10 80 C60 50 180 55 370 76 L370 80 L-10 80 Z" fill="#BCE9C8"/>
+              <!-- Corner Decorative Leaves -->
+              <path d="M0 80 C5 60 20 50 40 55 C25 65 15 75 0 80 Z" fill="#48BB78"/>
+              <path d="M10 80 C20 65 35 60 55 65 C40 75 25 80 10 80 Z" fill="#38A169"/>
+              <path d="M360 80 C355 60 340 50 320 55 C335 65 345 75 360 80 Z" fill="#48BB78"/>
+              <path d="M350 80 C340 65 325 60 305 65 C320 75 335 80 350 80 Z" fill="#38A169"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           2. HOME SCREEN (Matches screenshot media_1795280797951_55f4d09a)
+           (Note: Doctor Referral excluded per instructions)
+           ============================================================ -->
+      <section class="screen-view" id="screen-home">
+        <div class="home-container">
+          <!-- Blue Header Bar -->
+          <header class="home-blue-header">
+            <div class="home-top-row">
+              <button class="icon-btn-header" onclick="sakhiApp.openDrawer()" aria-label="Open Navigation Menu">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round">
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                  <line x1="3" y1="12" x2="21" y2="12"/>
+                  <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+              </button>
+
+              <button class="icon-btn-header" onclick="sakhiApp.showNotificationsModal()" aria-label="Notifications">
+                <div class="bell-badge-wrap">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                  </svg>
+                  <span class="notification-dot"></span>
+                </div>
+              </button>
+            </div>
+
+            <div class="home-greeting-wrap">
+              <h1 class="home-greeting-title">Hello, ASHA Worker!</h1>
+              <p class="home-greeting-sub">How can i help you today?</p>
+            </div>
+          </header>
+
+          <!-- White Card Area with Rounded Top -->
+          <div class="home-content-sheet">
+
+            <!-- Field Register Metrics Dashboard (Screenshot media_1795284339491_d1cf273d) -->
+            <div class="metrics-dashboard-banner">
+              <div class="metrics-dash-header">
+                <div class="dash-status-indicator">
+                  <span class="live-dot-green"></span>
+                  <span class="dash-title">Dashboard</span>
+                </div>
+                <div class="dash-header-right">
+                  <span class="dash-date">Saturday, 21 Nov 2026</span>
+                </div>
+              </div>
+
+              <div class="dash-cards-row">
+                <!-- Card 1: UPCOMING VISITS (Teal) -->
+                <div class="metric-dash-card card-upcoming" onclick="sakhiApp.navigateTo('visits'); sakhiApp.filterVisits('Upcoming')">
+                  <div class="dash-card-left-bar bar-teal"></div>
+                  <div class="dash-card-content">
+                    <span class="dash-card-label">UPCOMING VISITS</span>
+                    <div class="dash-card-number text-teal" id="statUpcomingVisits">2</div>
+                    <span class="dash-card-sub">Scheduled this week · Tap to view</span>
+                  </div>
+                  <div class="dash-card-icon icon-teal-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="16" y1="2" x2="16" y2="6"/>
+                      <line x1="8" y1="2" x2="8" y2="6"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Card 2: OVERDUE VISITS (Red) -->
+                <div class="metric-dash-card card-overdue" onclick="sakhiApp.navigateTo('visits'); sakhiApp.filterVisits('Overdue')">
+                  <div class="dash-card-left-bar bar-crimson"></div>
+                  <div class="dash-card-content">
+                    <span class="dash-card-label">OVERDUE VISITS</span>
+                    <div class="dash-card-number text-crimson" id="statOverdueVisits">2</div>
+                    <span class="dash-card-sub">Require immediate visit · Tap to view</span>
+                  </div>
+                  <div class="dash-card-icon icon-crimson-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="12" y1="8" x2="12" y2="12"/>
+                      <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 1: AI Chatbot (Large Hero Card) -->
+            <div class="home-hero-card card-ai-chatbot" onclick="sakhiApp.navigateTo('chat')">
+              <div class="card-left-icon icon-circle-green">
+                <!-- Friendly Green Robot Icon -->
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF">
+                  <rect x="5" y="7" width="14" height="12" rx="4"/>
+                  <circle cx="9" cy="12" r="1.5" fill="#22C55E"/>
+                  <circle cx="15" cy="12" r="1.5" fill="#22C55E"/>
+                  <path d="M9 15h6" stroke="#22C55E" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="12" y1="4" x2="12" y2="7" stroke="#FFFFFF" stroke-width="2"/>
+                  <circle cx="12" cy="3" r="1.5" fill="#FFFFFF"/>
+                </svg>
+              </div>
+              <div class="card-text-body">
+                <h3 class="card-title">AI Chatbot</h3>
+                <p class="card-sub">Ask health queries and get instant guidance</p>
+              </div>
+              <div class="card-watermark-chat">
+                <svg width="68" height="68" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                  <circle cx="9" cy="10" r="1.2" fill="#FFFFFF"/>
+                  <circle cx="12" cy="10" r="1.2" fill="#FFFFFF"/>
+                  <circle cx="15" cy="10" r="1.2" fill="#FFFFFF"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- 2-Column Grid: Maternal Health & Vaccine Tracker -->
+            <div class="home-grid-row">
+              <!-- Card 2: Maternal Health -->
+              <div class="home-grid-card card-maternal-health" onclick="sakhiApp.navigateTo('maternal-list')">
+                <div class="grid-card-icon icon-circle-pink">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="#FFFFFF">
+                    <circle cx="12" cy="4.5" r="3"/>
+                    <path d="M12 9c-3 0-5 2.5-5 6v6h3v-4h4v4h3v-6c0-3.5-2-6-5-6z"/>
+                    <!-- Small pregnant belly heart accent -->
+                    <circle cx="12" cy="13.5" r="1.5" fill="#EF476F"/>
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">Maternal health</h3>
+                <p class="grid-card-sub">Track & access maternal health information</p>
+              </div>
+
+              <!-- Card 3: Vaccine Tracker -->
+              <div class="home-grid-card card-vaccine-tracker" onclick="sakhiApp.navigateTo('vaccine-list')">
+                <div class="grid-card-icon icon-circle-purple">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m18 2 4 4"/>
+                    <path d="m17 7 3-3"/>
+                    <path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5"/>
+                    <path d="m9 11 4 4"/>
+                    <path d="m5 19-3 3"/>
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">Vaccine tracker</h3>
+                <p class="grid-card-sub">Track child vaccination scedules</p>
+              </div>
+            </div>
+
+            <!-- Recent Activity / Quick Status (Helpful for Field ASHA) -->
+            <div class="home-quick-stats-section">
+              <div class="section-header-row">
+                <h3 class="section-subheading">Field Register Summary</h3>
+                <span class="date-badge">Today: 21 Nov 2026</span>
+              </div>
+              <div class="quick-stats-strip">
+                <div class="stat-mini-pill stat-blue">
+                  <span class="count" id="statMothersCount">9</span>
+                  <span class="label">Mothers Registered</span>
+                </div>
+                <div class="stat-mini-pill stat-purple">
+                  <span class="count" id="statBabiesCount">9</span>
+                  <span class="label">Babies Tracked</span>
+                </div>
+                <div class="stat-mini-pill stat-orange">
+                  <span class="count">3</span>
+                  <span class="label">Due This Week</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           VISITS SCREEN (Matches Tab: Visits)
+           ============================================================ -->
+      <section class="screen-view" id="screen-visits">
+        <div class="list-screen-container">
+          <!-- Teal Header -->
+          <header class="app-header header-teal">
+            <button class="header-back-btn" onclick="sakhiApp.navigateBack()" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title">Field Visits</h1>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('visits')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <div class="list-body-content">
+            <!-- Filter Pills Bar -->
+            <div class="filter-pills-bar">
+              <button class="filter-pill-btn active" data-filter="all" onclick="sakhiApp.filterVisits('all', this)">All (5)</button>
+              <button class="filter-pill-btn pill-crimson" data-filter="Overdue" onclick="sakhiApp.filterVisits('Overdue', this)">Overdue (2)</button>
+              <button class="filter-pill-btn pill-amber" data-filter="Due" onclick="sakhiApp.filterVisits('Due', this)">Due (1)</button>
+              <button class="filter-pill-btn pill-teal" data-filter="Upcoming" onclick="sakhiApp.filterVisits('Upcoming', this)">Upcoming (2)</button>
+              <button class="filter-pill-btn pill-emerald" data-filter="Complete" onclick="sakhiApp.filterVisits('Complete', this)">Complete</button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-capsule-teal">
+              <input type="text" id="visitsSearchInput" class="search-capsule-input" placeholder="Search by name, village or purpose" oninput="sakhiApp.searchVisits(this.value)">
+              <span class="search-capsule-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </span>
+            </div>
+
+            <!-- Visits Cards Stream -->
+            <div class="visits-cards-stream" id="visitsListContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           FOLLOW-UPS SCREEN (Matches Tab: Follow-ups)
+           ============================================================ -->
+      <section class="screen-view" id="screen-followups">
+        <div class="list-screen-container">
+          <!-- Blue-Grey Header -->
+          <header class="app-header header-blue">
+            <button class="header-back-btn" onclick="sakhiApp.navigateBack()" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title">Follow-ups</h1>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('followups')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <div class="list-body-content">
+            <!-- Filter Pills Bar -->
+            <div class="filter-pills-bar">
+              <button class="filter-pill-btn active" data-filter="all" onclick="sakhiApp.filterFollowups('all', this)">All Follow-ups (3)</button>
+              <button class="filter-pill-btn pill-amber" data-filter="required" onclick="sakhiApp.filterFollowups('required', this)">Action Required (3)</button>
+              <button class="filter-pill-btn pill-emerald" data-filter="completed" onclick="sakhiApp.filterFollowups('completed', this)">Completed</button>
+            </div>
+
+            <!-- Follow-ups Cards Stream -->
+            <div class="visits-cards-stream" id="followupsListContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           ALERTS SCREEN (Matches Tab: Alerts)
+           ============================================================ -->
+      <section class="screen-view" id="screen-alerts">
+        <div class="list-screen-container">
+          <!-- Crimson Header -->
+          <header class="app-header header-crimson">
+            <button class="header-back-btn" onclick="sakhiApp.navigateBack()" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title">Clinical Alerts & Events</h1>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('alerts')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <div class="list-body-content">
+            <!-- Filter Pills Bar -->
+            <div class="filter-pills-bar">
+              <button class="filter-pill-btn active" data-filter="all" onclick="sakhiApp.filterAlerts('all', this)">All Alerts (3)</button>
+              <button class="filter-pill-btn pill-crimson" data-filter="Urgent" onclick="sakhiApp.filterAlerts('Urgent', this)">Urgent Priority (2)</button>
+              <button class="filter-pill-btn pill-amber" data-filter="Moderate" onclick="sakhiApp.filterAlerts('Moderate', this)">Moderate (1)</button>
+            </div>
+
+            <!-- Alerts Cards Stream -->
+            <div class="visits-cards-stream" id="alertsListContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: NEARBY CLINICS & HOSPITALS (GPS-DRIVEN) -->
+<section class="screen-view" id="screen-nearby-facilities">
+        <div class="list-screen-container">
+          <!-- Deep Teal Clinical Header -->
+          <header class="app-header header-facilities">
+            <button class="header-back-btn" onclick="sakhiApp.navigateBack()" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title">Nearby Clinics & Hospitals</h1>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('facilities')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <div class="list-body-content facilities-body-content">
+            <!-- Hero / Location Action Banner -->
+            <div class="facilities-hero-banner">
+              <div class="facilities-hero-text">
+                <div class="hero-badge-tag">
+                  <span class="live-dot-green"></span>
+                  <span id="heroGpsLiveIndicator">GPS Telemetry Ready</span>
+                </div>
+                <h2 class="facilities-hero-title">Real-Time Healthcare Facility Locator</h2>
+                <p class="facilities-hero-sub">Locate real Primary Health Centres (PHCs), 24x7 CHCs, sub-centres, and government hospitals centered on your actual GPS coordinates with live distance calculations and instant turn-by-turn navigation.</p>
+              </div>
+              <div class="facilities-hero-actions">
+                <button class="btn-detect-gps" id="btnDetectGps" onclick="sakhiApp.findNearbyFacilities()">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+                  </svg>
+                  <span id="btnDetectGpsText">Find Nearby Healthcare</span>
+                </button>
+                <button class="btn-refresh-gps" onclick="sakhiApp.findNearbyFacilities(true)" title="Refresh Current GPS Location">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- GPS Status Banner -->
+            <div class="gps-status-bar" id="facilitiesGpsStatus">
+              <span class="gps-status-icon">📍</span>
+              <span class="gps-status-text" id="facilitiesGpsText">Tap "Find Nearby Healthcare" to capture your device's live GPS coordinates and discover genuine healthcare facilities.</span>
+            </div>
+
+            <!-- Search Radius / Proximity Selector Bar -->
+            <div class="radius-selector-bar">
+              <span class="radius-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
+                Search Radius:
+              </span>
+              <div class="radius-pills" id="radiusPillsGroup">
+                <button class="radius-pill-btn active" data-radius="5" onclick="sakhiApp.setFacilityRadius(5, this)">5 km (Standard)</button>
+                <button class="radius-pill-btn" data-radius="10" onclick="sakhiApp.setFacilityRadius(10, this)">10 km (Expanded)</button>
+                <button class="radius-pill-btn" data-radius="20" onclick="sakhiApp.setFacilityRadius(20, this)">20 km (Regional)</button>
+              </div>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="filter-pills-bar facilities-filter-bar">
+              <button class="filter-pill-btn active" data-type="all" onclick="sakhiApp.filterFacilities('all', this)">All Facilities (<span id="countAllFacilities">0</span>)</button>
+              <button class="filter-pill-btn" data-type="phc" onclick="sakhiApp.filterFacilities('phc', this)">PHCs (<span id="countPhcFacilities">0</span>)</button>
+              <button class="filter-pill-btn" data-type="chc" onclick="sakhiApp.filterFacilities('chc', this)">CHCs (<span id="countChcFacilities">0</span>)</button>
+              <button class="filter-pill-btn" data-type="hospital" onclick="sakhiApp.filterFacilities('hospital', this)">Hospitals (<span id="countHospitalFacilities">0</span>)</button>
+              <button class="filter-pill-btn" data-type="clinic" onclick="sakhiApp.filterFacilities('clinic', this)">Clinics (<span id="countClinicFacilities">0</span>)</button>
+            </div>
+
+            <!-- Main Layout Grid: Split on Desktop (List + Sticky Map) -->
+            <div class="facilities-split-layout">
+              <!-- Left Column: Search & Facility Cards List -->
+              <div class="facilities-list-col">
+                <div class="facilities-search-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="facilitySearchInput" placeholder="Search genuine facilities by name or address..." oninput="sakhiApp.searchFacilities(this.value)">
+                </div>
+
+                <div class="facilities-cards-stream" id="facilitiesListContainer">
+                  <!-- Rendered dynamically via JS -->
+                </div>
+              </div>
+
+              <!-- Right Column: Interactive Map Area -->
+              <div class="facilities-map-col">
+                <div class="facilities-map-wrapper">
+                  <div class="map-header-bar">
+                    <div class="map-title-wrap">
+                      <span class="map-live-dot"></span>
+                      <span class="map-title">Live GPS Facility Map</span>
+                    </div>
+                    <div class="map-legend">
+                      <span class="legend-chip legend-user">● You</span>
+                      <span class="legend-chip legend-teal">● PHC</span>
+                      <span class="legend-chip legend-blue">● CHC</span>
+                      <span class="legend-chip legend-crimson">● Hospital</span>
+                    </div>
+                  </div>
+
+                  <!-- Google Map Container -->
+                  <div id="googleFacilitiesMap" class="google-facilities-map">
+                    <!-- Google Maps canvas or verified real-world GIS map -->
+                  </div>
+
+                  <div class="map-footer-info" id="mapFooterInfo">
+                    <span>Live GPS search active. Tap any facility pin or card to inspect details and get directions.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           3. MATERNAL HEALTH: LIST OF MOTHERS
+           (Matches screenshot media_1795280797953_e373792f)
+           ============================================================ -->
+      <section class="screen-view" id="screen-maternal-list">
+        <div class="list-screen-container">
+          <!-- Pink Header -->
+          <header class="app-header header-pink">
+            <button class="header-back-btn" onclick="sakhiApp.navigateBack()" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title">Maternal health</h1>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('maternal')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <div class="list-body-content">
+            <!-- Pink Search Capsule Pill -->
+            <div class="search-capsule-pink">
+              <input type="text" id="maternalSearchInput" class="search-capsule-input" placeholder="List of mothers" oninput="sakhiApp.filterMothers(this.value)">
+              <span class="search-capsule-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </span>
+            </div>
+
+            <!-- List of Mothers (Rounded Pill Cards with Avatar) -->
+            <div class="pill-items-list" id="mothersListContainer">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Add New Mother Bottom Button -->
+            <div class="list-bottom-action-wrap">
+              <button class="btn-full-pink" onclick="sakhiApp.openMaternalForm()">
+                Add New Mother
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           4. MATERNAL HEALTH: MOTHER DETAIL
+           (Matches screenshot media_1795280765040_0bbe1e26)
+           ============================================================ -->
+      <section class="screen-view" id="screen-maternal-detail">
+        <div class="detail-screen-container">
+          <!-- Pink Header -->
+          <header class="app-header header-pink">
+            <button class="header-back-btn" onclick="sakhiApp.navigateTo('maternal-list')" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title" id="maternalDetailHeaderName">Lakshmi Nandhana</h1>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('mother-detail')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <div class="detail-body-content">
+            <div class="detail-col-left">
+              <!-- Profile Card -->
+              <div class="profile-summary-card">
+                <div class="profile-avatar-circle circle-mint">
+                  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23D4F4E4'/><circle cx='50' cy='38' r='18' fill='%23F4B58A'/><path d='M30 36 C30 20 70 20 70 36 C70 48 64 54 64 54 L36 54 Z' fill='%231F2937'/><path d='M20 94 C24 64 38 60 50 60 C62 60 76 64 80 94 Z' fill='%23FFFFFF'/><path d='M35 60 L65 94 L80 94 L50 60 Z' fill='%23F04D79'/><circle cx='50' cy='34' r='1.5' fill='%23DC2626'/></svg>" alt="Mother Avatar">
+                </div>
+                <div class="profile-details-column">
+                  <h2 class="profile-name" id="motherDetailName">Lakshmi Nandhana</h2>
+                  <p class="profile-meta-line" id="motherDetailMeta">Age : 30 &nbsp; Blood Group : O+</p>
+                  <p class="profile-phone-line" id="motherDetailPhone">Phone Number :1234567891</p>
+                  <div class="profile-badges-row">
+                    <span class="pill-badge-pink" id="motherDetailPregBadge">24 Weeks Pregnant</span>
+                    <button class="pill-btn-edit-pink" onclick="sakhiApp.editCurrentMother()">Edit</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3 Action Tiles Row -->
+              <div class="action-tiles-row">
+                <!-- Tile 1: Checkup (Pink) -->
+                <div class="action-tile tile-pink">
+                  <div class="tile-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="16" y1="2" x2="16" y2="6"/>
+                      <line x1="8" y1="2" x2="8" y2="6"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                  </div>
+                  <div class="tile-title">Checkup</div>
+                  <div class="tile-subtitle" id="motherTileCheckup">15 jun 2026</div>
+                </div>
+
+                <!-- Tile 2: Iron Tablets (Green) -->
+                <div class="action-tile tile-green">
+                  <div class="tile-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF">
+                      <path d="M6 3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v5h14V6a1 1 0 0 0-1-1H6z"/>
+                    </svg>
+                  </div>
+                  <div class="tile-title">Iron Tablets</div>
+                  <div class="tile-subtitle" id="motherTileIron">Regular</div>
+                </div>
+
+                <!-- Tile 3: Vaccination (Purple) -->
+                <div class="action-tile tile-purple">
+                  <div class="tile-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round">
+                      <path d="m18 2 4 4"/>
+                      <path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5"/>
+                      <path d="m9 11 4 4"/>
+                    </svg>
+                  </div>
+                  <div class="tile-title">Vaccination</div>
+                  <div class="tile-subtitle" id="motherTileVaccine">Due in 5 days</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-col-right">
+              <!-- Section 1: Pregnancy Overview -->
+              <div class="section-block">
+                <h3 class="section-card-heading">Pregnancy Overview</h3>
+                <div class="card-white overview-card">
+                  <div class="overview-header-row">
+                    <span class="label-muted">Pregnancy week</span>
+                    <span class="label-muted">Due Date</span>
+                  </div>
+                  <div class="overview-values-row">
+                    <span class="value-pink" id="motherOverviewWeek">24 Weeks</span>
+                    <span class="value-dark" id="motherOverviewDueDate">28 Sep 2024</span>
+                  </div>
+                  <!-- Progress Track -->
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill-pink" id="motherProgressBar" style="width: 60%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 2: Health Summery -->
+              <div class="section-block">
+                <h3 class="section-card-heading">Health Summery</h3>
+                <div class="card-white health-summary-card">
+                  <!-- Row 1: Iron Tablets -->
+                  <div class="health-summary-row">
+                    <div class="health-icon icon-check-green">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="health-text-col">
+                      <div class="health-item-title">Iron Tablets</div>
+                      <div class="health-item-sub">Taking regularly</div>
+                    </div>
+                    <div class="health-status-tag tag-green">Regular</div>
+                  </div>
+
+                  <!-- Row 2: Folic Acid -->
+                  <div class="health-summary-row">
+                    <div class="health-icon icon-check-green">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="health-text-col">
+                      <div class="health-item-title">Folic Acid</div>
+                      <div class="health-item-sub">Taking regularly</div>
+                    </div>
+                    <div class="health-status-tag tag-green">Regular</div>
+                  </div>
+
+                  <!-- Row 3: Calcium -->
+                  <div class="health-summary-row">
+                    <div class="health-icon icon-alert-orange">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2L1 21h22L12 2zm0 4.5l8.5 14h-17L12 6.5zM11 11v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+                    </div>
+                    <div class="health-text-col">
+                      <div class="health-item-title">Calcium</div>
+                      <div class="health-item-sub">Due in 5 days</div>
+                    </div>
+                    <div class="health-status-tag tag-orange">Due</div>
+                  </div>
+
+                  <!-- Row 4: Weight -->
+                  <div class="health-summary-row">
+                    <div class="health-icon icon-check-green">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="health-text-col">
+                      <div class="health-item-title">Weight</div>
+                      <div class="health-item-sub">55 kg (Normal)</div>
+                    </div>
+                    <div class="health-status-tag tag-green">Normal</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           5. MATERNAL HEALTH: ADD/EDIT MOTHER PROFILE FORM
+           (Matches screenshot media_1795280797948_0bfc8ad4)
+           ============================================================ -->
+      <section class="screen-view" id="screen-maternal-form">
+        <div class="form-screen-container">
+          <!-- Pink Header -->
+          <header class="app-header header-pink">
+            <button class="header-back-btn" onclick="sakhiApp.navigateBack()" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title">Profile</h1>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('form')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <form class="form-body-content" id="maternalProfileForm" onsubmit="sakhiApp.handleSaveMother(event)">
+            <!-- Avatar with Camera Badge -->
+            <div class="form-avatar-picker-wrap">
+              <div class="form-avatar-circle circle-mint">
+                <img id="motherFormAvatarImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23D4F4E4'/><circle cx='50' cy='38' r='18' fill='%23F4B58A'/><path d='M30 36 C30 20 70 20 70 36 C70 48 64 54 64 54 L36 54 Z' fill='%231F2937'/><path d='M20 94 C24 64 38 60 50 60 C62 60 76 64 80 94 Z' fill='%23FFFFFF'/><path d='M35 60 L65 94 L80 94 L50 60 Z' fill='%23F04D79'/></svg>" alt="Mother photo">
+                <div class="camera-badge-circle" onclick="sakhiApp.showToast('Upload photo from device camera or gallery')">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                    <circle cx="12" cy="13" r="4"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Full Name (Full width) -->
+            <div class="form-group-block">
+              <label class="form-field-label">Full Name</label>
+              <input type="text" id="motherFormName" class="form-input-box" placeholder="e.g. Lakshmi Nandhana" required>
+            </div>
+
+            <!-- Age | DOB | Phone Number (3 fields row) -->
+            <div class="form-fields-row-3">
+              <div class="form-field-col">
+                <label class="form-field-label">Age</label>
+                <input type="number" id="motherFormAge" class="form-input-box" placeholder="30">
+              </div>
+              <div class="form-field-col">
+                <label class="form-field-label">DOB</label>
+                <input type="text" id="motherFormDOB" class="form-input-box" placeholder="DD/MM/YYYY">
+              </div>
+              <div class="form-field-col flex-2">
+                <label class="form-field-label">Phone Number</label>
+                <input type="tel" id="motherFormPhone" class="form-input-box" placeholder="1234567891">
+              </div>
+            </div>
+
+            <!-- Address (Full width) -->
+            <div class="form-group-block">
+              <label class="form-field-label">Address</label>
+              <input type="text" id="motherFormAddress" class="form-input-box" placeholder="Village / Ward Address">
+            </div>
+
+            <!-- Due Date | Weight | Iron Tablets (3 fields row) -->
+            <div class="form-fields-row-3">
+              <div class="form-field-col">
+                <label class="form-field-label">Due Date</label>
+                <input type="text" id="motherFormDueDate" class="form-input-box" placeholder="28 Sep 2024">
+              </div>
+              <div class="form-field-col">
+                <label class="form-field-label">Weight</label>
+                <input type="text" id="motherFormWeight" class="form-input-box" placeholder="55 kg">
+              </div>
+              <div class="form-field-col flex-2 input-with-plus-wrap">
+                <label class="form-field-label">Iron Tablets</label>
+                <div class="input-relative-wrap">
+                  <input type="text" id="motherFormIron" class="form-input-box" placeholder="Regular">
+                  <button type="button" class="field-inside-plus-btn" onclick="sakhiApp.showToast('Log iron tablets dosage/schedule')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="12" y1="8" x2="12" y2="16"/>
+                      <line x1="8" y1="12" x2="16" y2="12"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Blood Group | More Details Button -->
+            <div class="form-fields-row-2">
+              <div class="form-field-col flex-1">
+                <label class="form-field-label">Blood Group</label>
+                <input type="text" id="motherFormBlood" class="form-input-box" placeholder="O+">
+              </div>
+              <div class="form-field-col flex-2 flex-align-end">
+                <button type="button" class="btn-more-details-pink" onclick="sakhiApp.showToast('Opening clinical history and ANC records...')">More Details</button>
+              </div>
+            </div>
+
+            <!-- Save Prominent Pink Button -->
+            <div class="form-submit-wrap">
+              <button type="submit" class="btn-full-pink btn-save-action">Save</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           6. VACCINE TRACKER: LIST OF BABIES
+           (Matches screenshot media_1795280765040_6a677754)
+           ============================================================ -->
+      <section class="screen-view" id="screen-vaccine-list">
+        <div class="list-screen-container">
+          <!-- Purple Header -->
+          <header class="app-header header-purple">
+            <button class="header-back-btn" onclick="sakhiApp.navigateBack()" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title">Vaccine Tracker</h1>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('vaccine')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <div class="list-body-content">
+            <!-- Purple Search Capsule Pill -->
+            <div class="search-capsule-purple">
+              <input type="text" id="babySearchInput" class="search-capsule-input" placeholder="List of Babies" oninput="sakhiApp.filterBabies(this.value)">
+              <span class="search-capsule-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </span>
+            </div>
+
+            <!-- List of Babies (Rounded Pill Cards with Baby Avatar) -->
+            <div class="pill-items-list" id="babiesListContainer">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Add New Baby Bottom Button -->
+            <div class="list-bottom-action-wrap">
+              <button class="btn-full-purple" onclick="sakhiApp.openBabyForm()">
+                Add New Baby
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           7. VACCINE TRACKER: CHILD DETAIL
+           (Matches screenshot media_1795280765048_4ed3a8c9)
+           ============================================================ -->
+      <section class="screen-view" id="screen-vaccine-detail">
+        <div class="detail-screen-container">
+          <!-- Purple Header -->
+          <header class="app-header header-purple">
+            <button class="header-back-btn" onclick="sakhiApp.navigateTo('vaccine-list')" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title">Vaccine tracker</h1>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('child-detail')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <div class="detail-body-content">
+            <div class="detail-col-left">
+              <!-- Child Profile Card -->
+              <div class="profile-summary-card">
+                <div class="profile-avatar-circle circle-baby">
+                  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23EDF2FE'/><circle cx='50' cy='42' r='20' fill='%23F6BE97'/><path d='M46 22 C48 18 52 18 54 22 C52 26 48 26 46 22 Z' fill='%231F2937'/><circle cx='43' cy='40' r='2' fill='%231F2937'/><circle cx='57' cy='40' r='2' fill='%231F2937'/><path d='M46 48 Q50 52 54 48' stroke='%23C2410C' stroke-width='2' stroke-linecap='round' fill='none'/><path d='M30 84 C30 64 70 64 70 84 Z' fill='%23FBBF24'/></svg>" alt="Child Avatar">
+                  <div class="avatar-camera-mini">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.5">
+                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                      <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="profile-details-column">
+                  <h2 class="profile-name" id="childDetailName">Rohan Kumar</h2>
+                  <p class="profile-meta-line" id="childDetailMeta">Age : 8 months : Male</p>
+                  <p class="profile-phone-line" id="childDetailPhone">Phone Number :1234567891</p>
+                  <div class="profile-badges-row">
+                    <button class="pill-btn-edit-purple" onclick="sakhiApp.editCurrentBaby()">Edit</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4 Metric Pill Cards (1 Row of 4) -->
+              <div class="metrics-quad-row">
+                <!-- Total Vaccines (Blue) -->
+                <div class="metric-quad-pill pill-blue">
+                  <div class="metric-icon-small icon-blue">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                  </div>
+                  <div class="metric-label">Total Vaccines</div>
+                  <div class="metric-number" id="childTotalVaccines">10</div>
+                </div>
+
+                <!-- Completed (Green) -->
+                <div class="metric-quad-pill pill-green">
+                  <div class="metric-icon-small icon-green">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="16 9 10 15 8 13"/></svg>
+                  </div>
+                  <div class="metric-label">Completed</div>
+                  <div class="metric-number" id="childCompletedVaccines">7</div>
+                </div>
+
+                <!-- Pending (Orange) -->
+                <div class="metric-quad-pill pill-orange">
+                  <div class="metric-icon-small icon-orange">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.2"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>
+                  </div>
+                  <div class="metric-label">Pending</div>
+                  <div class="metric-number" id="childPendingVaccines">2</div>
+                </div>
+
+                <!-- Upcoming (Pink) -->
+                <div class="metric-quad-pill pill-pink">
+                  <div class="metric-icon-small icon-pink">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  </div>
+                  <div class="metric-label">Upcoming</div>
+                  <div class="metric-number" id="childUpcomingVaccines">1</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-col-right">
+              <!-- Vaccination Schedule Timeline Section -->
+              <div class="section-block">
+                <h3 class="section-card-heading">Vaccination Schedule</h3>
+                <div class="card-white schedule-timeline-card" id="childVaccineTimeline">
+                  <!-- Timeline items populated by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           8. VACCINE TRACKER: ADD/EDIT BABY FORM
+           (Matches screenshot media_1795280765028_33a933d7)
+           ============================================================ -->
+      <section class="screen-view" id="screen-vaccine-form">
+        <div class="form-screen-container">
+          <!-- Purple Header -->
+          <header class="app-header header-purple">
+            <button class="header-back-btn" onclick="sakhiApp.navigateBack()" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title">Vaccine tracker</h1>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('form')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <form class="form-body-content" id="babyProfileForm" onsubmit="sakhiApp.handleSaveBaby(event)">
+            <!-- Baby Avatar with Camera Badge -->
+            <div class="form-avatar-picker-wrap">
+              <div class="form-avatar-circle circle-baby-form">
+                <img id="babyFormAvatarImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23EDF2FE'/><circle cx='50' cy='42' r='20' fill='%23F6BE97'/><circle cx='43' cy='40' r='2' fill='%231F2937'/><circle cx='57' cy='40' r='2' fill='%231F2937'/><path d='M46 48 Q50 52 54 48' stroke='%23C2410C' stroke-width='2' stroke-linecap='round' fill='none'/><path d='M30 84 C30 64 70 64 70 84 Z' fill='%23FBBF24'/></svg>" alt="Baby photo">
+                <div class="camera-badge-circle" onclick="sakhiApp.showToast('Upload photo from device camera or gallery')">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                    <circle cx="12" cy="13" r="4"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Full Name (Full width) -->
+            <div class="form-group-block">
+              <label class="form-field-label">Full Name</label>
+              <input type="text" id="babyFormName" class="form-input-box" placeholder="e.g. Rohan Kumar" required>
+            </div>
+
+            <!-- Gender | DOB | Phone Number (3 fields row) -->
+            <div class="form-fields-row-3">
+              <div class="form-field-col">
+                <label class="form-field-label">Gender</label>
+                <input type="text" id="babyFormGender" class="form-input-box" placeholder="Male">
+              </div>
+              <div class="form-field-col">
+                <label class="form-field-label">DOB</label>
+                <input type="text" id="babyFormDOB" class="form-input-box" placeholder="DD/MM/YYYY">
+              </div>
+              <div class="form-field-col flex-2">
+                <label class="form-field-label">Phone Number</label>
+                <input type="tel" id="babyFormPhone" class="form-input-box" placeholder="1234567891">
+              </div>
+            </div>
+
+            <!-- Address (Full width) -->
+            <div class="form-group-block">
+              <label class="form-field-label">Address</label>
+              <input type="text" id="babyFormAddress" class="form-input-box" placeholder="Village / Ward Address">
+            </div>
+
+            <!-- Parent/Gardian Name (Full width) -->
+            <div class="form-group-block">
+              <label class="form-field-label">Parent/Gardian Name</label>
+              <input type="text" id="babyFormGuardian" class="form-input-box" placeholder="e.g. Suresh Kumar">
+            </div>
+
+            <!-- Blood Group | More Details Button -->
+            <div class="form-fields-row-2">
+              <div class="form-field-col flex-1">
+                <label class="form-field-label">Blood Group</label>
+                <input type="text" id="babyFormBlood" class="form-input-box" placeholder="B+">
+              </div>
+              <div class="form-field-col flex-2 flex-align-end">
+                <button type="button" class="btn-more-details-purple" onclick="sakhiApp.showToast('Opening birth weight, APGAR score & immunization history...')">More Details</button>
+              </div>
+            </div>
+
+            <!-- Save Prominent Purple Button -->
+            <div class="form-submit-wrap">
+              <button type="submit" class="btn-full-purple btn-save-action">Save</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           9. AI HEALTH ASSISTANT: CHAT SCREEN
+           (Matches screenshot media_1795280797956_37213cd7)
+           ============================================================ -->
+      <section class="screen-view" id="screen-chat">
+        <div class="chat-screen-container">
+          <!-- Blue Header with Bot Avatar & Subtitle -->
+          <header class="app-header header-blue chat-custom-header">
+            <button class="header-back-btn" onclick="sakhiApp.navigateBack()" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <div class="chat-header-identity">
+              <div class="chat-bot-avatar-circle">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="#FFFFFF">
+                  <rect x="5" y="7" width="14" height="12" rx="4"/>
+                  <circle cx="9" cy="12" r="1.5" fill="#2B66FF"/>
+                  <circle cx="15" cy="12" r="1.5" fill="#2B66FF"/>
+                  <path d="M9 15h6" stroke="#2B66FF" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="12" y1="4" x2="12" y2="7" stroke="#FFFFFF" stroke-width="2"/>
+                  <circle cx="12" cy="3" r="1.5" fill="#FFFFFF"/>
+                </svg>
+              </div>
+              <div class="chat-header-text">
+                <h1 class="chat-title">AI Health Assistant</h1>
+                <p class="chat-sub">Your Health Companion</p>
+              </div>
+            </div>
+            <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('chat')" aria-label="More Options">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </header>
+
+          <!-- Chat Conversation Stream -->
+          <div class="chat-messages-scroll" id="chatMessagesScroll">
+            <!-- Bot Welcome Bubble -->
+            <div class="chat-row bot-row">
+              <div class="bubble-avatar-mini bot-mini-avatar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#2B66FF">
+                  <rect x="5" y="7" width="14" height="12" rx="4"/>
+                  <circle cx="9" cy="12" r="1.2" fill="#FFFFFF"/>
+                  <circle cx="15" cy="12" r="1.2" fill="#FFFFFF"/>
+                  <path d="M9 15h6" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="chat-bubble bot-bubble">
+                <p class="bubble-text">Hello ASHA Worker!<br>I’m your AI Health Assistant.<br>How can i help you today?</p>
+              </div>
+            </div>
+
+            <!-- Demo Pre-loaded message matching screenshot -->
+            <div class="chat-row user-row">
+              <div class="bubble-avatar-mini user-mini-avatar">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23D4F4E4'/><circle cx='50' cy='38' r='18' fill='%23F4B58A'/><path d='M30 36 C30 20 70 20 70 36 C70 48 64 54 64 54 L36 54 Z' fill='%231F2937'/><path d='M20 94 C24 64 38 60 50 60 C62 60 76 64 80 94 Z' fill='%23FFFFFF'/><path d='M35 60 L65 94 L80 94 L50 60 Z' fill='%23F04D79'/></svg>" alt="ASHA Worker">
+              </div>
+              <div class="chat-bubble user-bubble">
+                <p class="bubble-text">A pregnant women missed her iron tablets.what should i do?</p>
+                <div class="bubble-meta">
+                  <span class="bubble-time">09:32 AM</span>
+                  <span class="bubble-ticks">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5"><polyline points="18 6 9 17 4 12"/><polyline points="22 10 13 21 8 16"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bot Response matching screenshot -->
+            <div class="chat-row bot-row">
+              <div class="bubble-avatar-mini bot-mini-avatar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#2B66FF">
+                  <rect x="5" y="7" width="14" height="12" rx="4"/>
+                  <circle cx="9" cy="12" r="1.2" fill="#FFFFFF"/>
+                  <circle cx="15" cy="12" r="1.2" fill="#FFFFFF"/>
+                  <path d="M9 15h6" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="chat-bubble bot-bubble">
+                <p class="bubble-text">Iron tablets help prevent anemia in pregnant women. Encourage her to take it daily after food. If she feels symptoms like dizziness, weakness or nausea, suggest her to consult a doctor.</p>
+                <div class="bubble-meta">
+                  <span class="bubble-time">09:32 AM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Floating Input Bar -->
+          <div class="chat-bottom-input-bar">
+            <div class="chat-input-pill">
+              <button type="button" class="input-icon-btn btn-upload" onclick="sakhiApp.showToast('Attach clinical report / lab sheet')" aria-label="Upload document">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </button>
+
+              <input type="text" id="chatMessageInput" class="chat-text-input" placeholder="Type your question..." onkeydown="if(event.key === 'Enter') sakhiApp.sendChatMessage()">
+
+              <!-- Mic Button (Supports Voice Recognition & Audio recording) -->
+              <button type="button" class="input-icon-btn btn-mic" id="chatMicBtn" onclick="sakhiApp.toggleChatVoice()" aria-label="Speak voice query">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B66FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="23"/>
+                  <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+
+      <!-- ============================================================
+           10. MY PROFILE SCREEN
+           (Matches screenshot media_1795280765048_2e6cdcb0)
+           ============================================================ -->
+      <section class="screen-view" id="screen-profile">
+        <div class="profile-screen-container">
+          <!-- Blue Header -->
+          <header class="app-header header-blue">
+            <button class="header-back-btn" onclick="sakhiApp.navigateBack()" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <h1 class="header-title">My Profile</h1>
+            <button class="header-bell-btn" onclick="sakhiApp.showNotificationsModal()" aria-label="Notifications">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+            </button>
+          </header>
+
+          <div class="profile-body-content">
+            <div class="detail-col-left">
+              <!-- Top Profile Card -->
+              <div class="worker-card-white">
+                <div class="worker-avatar-circle">
+                  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23DCE7FE'/><circle cx='50' cy='36' r='20' fill='%23F4B58A'/><path d='M30 32 C30 18 70 18 70 32 C70 42 66 48 66 48 L34 48 Z' fill='%231F2937'/><path d='M22 92 C24 66 38 58 50 58 C62 58 76 66 78 92 Z' fill='%232B66FF'/><path d='M44 58 L56 58 L54 78 L46 78 Z' fill='%23FFFFFF'/></svg>" alt="Arunima Raj">
+                </div>
+                <div class="worker-info-column">
+                  <h2 class="worker-name" id="workerProfileName">Arunima Raj</h2>
+                  <div class="worker-meta-row">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span id="workerProfilePhone">9876543210</span>
+                  </div>
+                  <div class="worker-meta-row">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span id="workerProfileLocation">Bangalore, Karnataka</span>
+                  </div>
+                  <div class="worker-edit-wrap">
+                    <button class="btn-worker-edit" onclick="sakhiApp.showToast('Profile editing enabled for ASHA field worker')">Edit</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Logout Pill Card -->
+              <div class="profile-logout-wrap">
+                <button class="btn-profile-logout" onclick="sakhiApp.logout()">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                  </svg>
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="detail-col-right">
+              <!-- Profile Overview Group Card -->
+              <div class="section-block">
+                <h3 class="section-card-heading">Profile Overview</h3>
+                <div class="card-white details-group-card">
+                  <div class="details-row">
+                    <span class="details-icon icon-blue">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </span>
+                    <span class="details-label">Full Name</span>
+                    <span class="details-value">ASHA Worker</span>
+                  </div>
+
+                  <div class="details-row">
+                    <span class="details-icon icon-blue">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </span>
+                    <span class="details-label">Email Address</span>
+                    <span class="details-value">asha.worker@gmail.com</span>
+                  </div>
+
+                  <div class="details-row">
+                    <span class="details-icon icon-blue">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </span>
+                    <span class="details-label">Phone Number</span>
+                    <span class="details-value">9876543210</span>
+                  </div>
+
+                  <div class="details-row">
+                    <span class="details-icon icon-blue">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </span>
+                    <span class="details-label">Date of Birth</span>
+                    <span class="details-value">12 Jan 1995</span>
+                  </div>
+
+                  <div class="details-row">
+                    <span class="details-icon icon-blue">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </span>
+                    <span class="details-label">Address</span>
+                    <span class="details-value">Bangalore, Karnataka</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Account & Settings Group Card -->
+              <div class="section-block">
+                <h3 class="section-card-heading">Account & Settings</h3>
+                <div class="card-white settings-group-card">
+                  <div class="settings-row" onclick="sakhiApp.showToast('Password change link sent')">
+                    <span class="settings-icon">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </span>
+                    <span class="settings-label">Change Password</span>
+                    <span class="settings-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    </span>
+                  </div>
+
+                  <div class="settings-row" onclick="sakhiApp.showToast('Sakhi Privacy & Field Health Data Policy')">
+                    <span class="settings-icon">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </span>
+                    <span class="settings-label">Privacy Policy</span>
+                    <span class="settings-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    </span>
+                  </div>
+
+                  <div class="settings-row" onclick="sakhiApp.showToast('Sakhi v2.0 — Maternal & Child Health Assistant for ASHA workers')">
+                    <span class="settings-icon">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    </span>
+                    <span class="settings-label">About Us</span>
+                    <span class="settings-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+      <!-- ============================================================
+           NEARBY CLINICS & HOSPITALS SCREEN
+           (Feature 2: Healthcare Facilities Locator with Google Maps)
+           ============================================================ -->
+      
+
+      <!-- ============================================================
+           11. MOBILE BOTTOM NAVIGATION BAR
+           (Matches screenshot media_1795280797951_55f4d09a)
+           ============================================================ -->
+      <nav class="mobile-bottom-nav" id="mobileBottomNav">
+        <button class="bottom-tab-btn active" data-tab="home" onclick="sakhiApp.navigateTo('home')">
+          <div class="tab-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+          </div>
+          <span class="tab-label">Home</span>
+        </button>
+
+        <button class="bottom-tab-btn" data-tab="chat" onclick="sakhiApp.navigateTo('chat')">
+          <div class="tab-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <span class="tab-label">Chat</span>
+        </button>
+
+        <button class="bottom-tab-btn" data-tab="profile" onclick="sakhiApp.navigateTo('profile')">
+          <div class="tab-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <span class="tab-label">Profile</span>
+        </button>
+      </nav>
+
+    </main>
+    </div><!-- /.desktop-content-area -->
+
+  </div><!-- /.app-layout -->
+
+
+  <!-- ============================================================
+       12. SLIDE-OUT NAVIGATION DRAWER
+       (Matches screenshot media_1795280765056_c0875c20)
+       (Doctor Referral excluded per instructions)
+       ============================================================ -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="sakhiApp.closeDrawer()">
+    <aside class="drawer-panel" onclick="event.stopPropagation()">
+      <!-- Blue Top Banner -->
+      <div class="drawer-header-blue">
+        <div class="drawer-top-icons">
+          <button class="drawer-icon-btn" onclick="sakhiApp.closeDrawer()" aria-label="Close Drawer">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+          <button class="drawer-icon-btn" onclick="sakhiApp.showNotificationsModal()" aria-label="Notifications">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="drawer-user-info">
+          <div class="drawer-avatar-circle">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23DCE7FE'/><circle cx='50' cy='36' r='20' fill='%23F4B58A'/><path d='M30 32 C30 18 70 18 70 32 C70 42 66 48 66 48 L34 48 Z' fill='%231F2937'/><path d='M22 92 C24 66 38 58 50 58 C62 58 76 66 78 92 Z' fill='%232B66FF'/><path d='M44 58 L56 58 L54 78 L46 78 Z' fill='%23FFFFFF'/></svg>" alt="ASHA Worker">
+          </div>
+          <h3 class="drawer-user-name">ASHA Worker</h3>
+        </div>
+      </div>
+
+      <!-- White Menu List Body -->
+      <div class="drawer-menu-scroll">
+        <!-- 1. Home -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.navigateTo('home')">
+          <span class="drawer-item-icon icon-blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#2B66FF"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          </span>
+          <span class="drawer-item-label">Home</span>
+          <span class="drawer-item-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </button>
+
+        <!-- Visits Tab (Screenshot Accurate) -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.navigateTo('visits')">
+          <span class="drawer-item-icon icon-teal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4"/>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+          </span>
+          <span class="drawer-item-label">Visits</span>
+          <span class="drawer-item-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </button>
+
+        <!-- Follow-ups Tab (Screenshot Accurate) -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.navigateTo('followups')">
+          <span class="drawer-item-icon icon-blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </span>
+          <span class="drawer-item-label">Follow-ups</span>
+          <span class="drawer-item-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </button>
+
+        <!-- Alerts Tab (Screenshot Accurate) -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.navigateTo('alerts')">
+          <span class="drawer-item-icon icon-crimson">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </span>
+          <span class="drawer-item-label">Alerts</span>
+          <span class="drawer-notification-badge"></span>
+        </button>
+
+        <!-- 2. AI Chatbot -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.navigateTo('chat')">
+          <span class="drawer-item-icon icon-green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#22C55E">
+              <rect x="4" y="6" width="16" height="13" rx="4"/>
+              <circle cx="9" cy="11" r="1.5" fill="#FFFFFF"/>
+              <circle cx="15" cy="11" r="1.5" fill="#FFFFFF"/>
+              <line x1="12" y1="3" x2="12" y2="6" stroke="#22C55E" stroke-width="2"/>
+            </svg>
+          </span>
+          <span class="drawer-item-label">AI Chatbot</span>
+          <span class="drawer-item-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </button>
+
+        <!-- 3. Maternal Health -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.navigateTo('maternal-list')">
+          <span class="drawer-item-icon icon-pink">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#F04D79">
+              <circle cx="12" cy="4" r="3"/>
+              <path d="M12 8c-3 0-5 2.5-5 6v7h3v-4h4v4h3v-7c0-3.5-2-6-5-6z"/>
+            </svg>
+          </span>
+          <span class="drawer-item-label">Maternal Health</span>
+          <span class="drawer-item-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </button>
+
+        <!-- 4. Vaccine Tracker -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.navigateTo('vaccine-list')">
+          <span class="drawer-item-icon icon-purple">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#7C69EE">
+              <path d="m18 2 4 4-2 2-4-4 2-2zM4 16l6-6 4 4-6 6H4v-4z"/>
+            </svg>
+          </span>
+          <span class="drawer-item-label">Vaccine Tracker</span>
+          <span class="drawer-item-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </button>
+
+        <!-- Nearby Clinics & Hospitals (Feature 2) -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.navigateTo('nearby-facilities')">
+          <span class="drawer-item-icon icon-teal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18"/>
+              <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/>
+              <path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/>
+              <line x1="10" y1="9" x2="14" y2="9"/>
+              <line x1="12" y1="7" x2="12" y2="11"/>
+            </svg>
+          </span>
+          <span class="drawer-item-label">Nearby Clinics & Hospitals</span>
+          <span class="drawer-item-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </button>
+
+        <!-- Note: Doctor Referral explicitly excluded as instructed -->
+
+        <!-- 5. Health Records -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.showToast('Accessing ASHA Health Register')">
+          <span class="drawer-item-icon icon-blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+              <path d="M9 12h6m-6 4h6"/>
+            </svg>
+          </span>
+          <span class="drawer-item-label">Health Records</span>
+          <span class="drawer-item-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </button>
+
+        <!-- 6. Notifications -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.showNotificationsModal()">
+          <span class="drawer-item-icon icon-muted">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </span>
+          <span class="drawer-item-label">Notifications</span>
+          <span class="drawer-notification-badge"></span>
+        </button>
+
+        <!-- 7. Help & Support -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.showToast('Primary Health Center Helpdesk: 1800-425-4444')">
+          <span class="drawer-item-icon icon-muted">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </span>
+          <span class="drawer-item-label">Help & Support</span>
+        </button>
+
+        <!-- 8. Settings -->
+        <button class="drawer-menu-item" onclick="sakhiApp.closeDrawer(); sakhiApp.navigateTo('profile')">
+          <span class="drawer-item-icon icon-muted">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span class="drawer-item-label">Settings</span>
+        </button>
+
+        <!-- 9. Logout Button -->
+        <div class="drawer-logout-wrap">
+          <button class="btn-drawer-logout" onclick="sakhiApp.closeDrawer(); sakhiApp.logout()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+
+  <!-- Options Menu Modal (3-Dots dropdown) -->
+  <div class="modal-backdrop" id="optionsModal" onclick="sakhiApp.closeOptionsMenu()">
+    <div class="options-sheet" onclick="event.stopPropagation()">
+      <div class="options-sheet-handle"></div>
+      <h4 class="options-sheet-title" id="optionsSheetTitle">Options</h4>
+      <div class="options-actions-list" id="optionsActionsList">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
