@@ -1,0 +1,26 @@
+{
+  "children": {
+    "0 Weeks": "BCG, Hepatitis B (Birth dose), bOPV-0",
+    "6 Weeks": "bOPV-1, Pentavalent-1, fIPV-1, Rotavirus-1, PCV-1",
+    "10 Weeks": "bOPV-2, Pentavalent-2, Rotavirus-2",
+    "14 Weeks": "bOPV-3, Pentavalent-3, fIPV-2, Rotavirus-3, PCV-2",
+    "39-52 Weeks": "MR-1, fIPV-3, PCV-Booster, Vitamin A (1st dose), JE-1 (endemic districts)",
+    "69-104 Weeks": "MR-2, DPT Booster-1, bOPV Booster, Vitamin A (2nd dose), JE-2 (endemic districts)",
+    "104 Weeks": "Vitamin A (3rd dose)",
+    "130 Weeks": "Vitamin A (4th dose)",
+    "156 Weeks": "Vitamin A (5th dose)",
+    "182 Weeks": "Vitamin A (6th dose)",
+    "208 Weeks": "Vitamin A (7th dose)",
+    "234 Weeks": "Vitamin A (8th dose)",
+    "260 Weeks": "Vitamin A (9th dose)",
+    "260-312 Weeks": "DPT Booster-2",
+    "520 Weeks": "Td",
+    "832 Weeks": "Td"
+  },
+  "pregnant_women": {
+    "0-12 Weeks": "Td-1",
+    "4 Weeks after Td-1 (before 36 Weeks)": "Td-2",
+    "Subsequent Pregnancy (if 2 doses within 156 Weeks)": "Td Booster",
+    "At Delivery (if no prior Td/TT)": "Td (Emergency catch-up)"
+  }
+}
