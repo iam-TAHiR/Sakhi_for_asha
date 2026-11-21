@@ -1,0 +1,9 @@
+{
+  "name": "sakhi",
+  "compatibility_date": "2026-11-19",
+  "assets": {
+    "directory": "./public/"
+  },
+  "workers_dev": true,
+  "preview_urls": false
+}

@@ -32,7 +32,7 @@
           <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23DCE7FE'/><circle cx='50' cy='36' r='20' fill='%23F4B58A'/><path d='M30 32 C30 18 70 18 70 32 C70 42 66 48 66 48 L34 48 Z' fill='%231F2937'/><path d='M22 92 C24 66 38 58 50 58 C62 58 76 66 78 92 Z' fill='%232B66FF'/><path d='M44 58 L56 58 L54 78 L46 78 Z' fill='%23FFFFFF'/></svg>" alt="ASHA Worker">
         </div>
         <div class="desktop-profile-info">
-          <span class="name">Arunima Raj</span>
+          <span class="name">ASHA Worker</span>
           <span class="role">ASHA Field Worker</span>
         </div>
       </div>
@@ -237,7 +237,7 @@
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                 </svg>
               </span>
-              <input type="tel" id="loginPhone" class="auth-input" placeholder="Phone Number" value="9876543210" required>
+              <input type="tel" id="loginPhone" class="auth-input" placeholder="Phone Number" required>
             </div>
 
             <!-- Password Input -->
@@ -248,7 +248,7 @@
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                 </svg>
               </span>
-              <input type="password" id="loginPassword" class="auth-input" placeholder="Password" value="••••••••" required>
+              <input type="password" id="loginPassword" class="auth-input" placeholder="Password" required>
               <button type="button" class="btn-toggle-eye" onclick="sakhiApp.togglePasswordVisibility('loginPassword', this)">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
@@ -365,7 +365,7 @@
                   <div class="dash-card-left-bar bar-teal"></div>
                   <div class="dash-card-content">
                     <span class="dash-card-label">UPCOMING VISITS</span>
-                    <div class="dash-card-number text-teal" id="statUpcomingVisits">2</div>
+                    <div class="dash-card-number text-teal" id="statUpcomingVisits">—</div>
                     <span class="dash-card-sub">Scheduled this week · Tap to view</span>
                   </div>
                   <div class="dash-card-icon icon-teal-box">
@@ -383,7 +383,7 @@
                   <div class="dash-card-left-bar bar-crimson"></div>
                   <div class="dash-card-content">
                     <span class="dash-card-label">OVERDUE VISITS</span>
-                    <div class="dash-card-number text-crimson" id="statOverdueVisits">2</div>
+                    <div class="dash-card-number text-crimson" id="statOverdueVisits">—</div>
                     <span class="dash-card-sub">Require immediate visit · Tap to view</span>
                   </div>
                   <div class="dash-card-icon icon-crimson-box">
@@ -460,19 +460,19 @@
             <div class="home-quick-stats-section">
               <div class="section-header-row">
                 <h3 class="section-subheading">Field Register Summary</h3>
-                <span class="date-badge">Today: 21 Nov 2026</span>
+                <span class="date-badge" id="dashboardTodayDate">Today</span>
               </div>
               <div class="quick-stats-strip">
                 <div class="stat-mini-pill stat-blue">
-                  <span class="count" id="statMothersCount">9</span>
+                  <span class="count" id="statMothersCount">—</span>
                   <span class="label">Mothers Registered</span>
                 </div>
                 <div class="stat-mini-pill stat-purple">
-                  <span class="count" id="statBabiesCount">9</span>
+                  <span class="count" id="statBabiesCount">—</span>
                   <span class="label">Babies Tracked</span>
                 </div>
                 <div class="stat-mini-pill stat-orange">
-                  <span class="count">3</span>
+                  <span class="count" id="statDueThisWeek">—</span>
                   <span class="label">Due This Week</span>
                 </div>
               </div>
@@ -847,7 +847,7 @@
                 <polyline points="15 18 9 12 15 6"/>
               </svg>
             </button>
-            <h1 class="header-title" id="maternalDetailHeaderName">Lakshmi Nandhana</h1>
+            <h1 class="header-title" id="maternalDetailHeaderName">Mother Details</h1>
             <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('mother-detail')" aria-label="More Options">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
                 <circle cx="12" cy="5" r="2"/>
@@ -865,7 +865,7 @@
                   <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23D4F4E4'/><circle cx='50' cy='38' r='18' fill='%23F4B58A'/><path d='M30 36 C30 20 70 20 70 36 C70 48 64 54 64 54 L36 54 Z' fill='%231F2937'/><path d='M20 94 C24 64 38 60 50 60 C62 60 76 64 80 94 Z' fill='%23FFFFFF'/><path d='M35 60 L65 94 L80 94 L50 60 Z' fill='%23F04D79'/><circle cx='50' cy='34' r='1.5' fill='%23DC2626'/></svg>" alt="Mother Avatar">
                 </div>
                 <div class="profile-details-column">
-                  <h2 class="profile-name" id="motherDetailName">Lakshmi Nandhana</h2>
+                  <h2 class="profile-name" id="motherDetailName">Mother Details</h2>
                   <p class="profile-meta-line" id="motherDetailMeta">Age : 30 &nbsp; Blood Group : O+</p>
                   <p class="profile-phone-line" id="motherDetailPhone">Phone Number :1234567891</p>
                   <div class="profile-badges-row">
@@ -1019,7 +1019,7 @@
                 <polyline points="15 18 9 12 15 6"/>
               </svg>
             </button>
-            <h1 class="header-title">Profile</h1>
+            <h1 class="header-title">Register Pregnancy</h1>
             <button class="header-more-btn" onclick="sakhiApp.showOptionsMenu('form')" aria-label="More Options">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
                 <circle cx="12" cy="5" r="2"/>
@@ -1030,86 +1030,24 @@
           </header>
 
           <form class="form-body-content" id="maternalProfileForm" onsubmit="sakhiApp.handleSaveMother(event)">
-            <!-- Avatar with Camera Badge -->
-            <div class="form-avatar-picker-wrap">
-              <div class="form-avatar-circle circle-mint">
-                <img id="motherFormAvatarImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23D4F4E4'/><circle cx='50' cy='38' r='18' fill='%23F4B58A'/><path d='M30 36 C30 20 70 20 70 36 C70 48 64 54 64 54 L36 54 Z' fill='%231F2937'/><path d='M20 94 C24 64 38 60 50 60 C62 60 76 64 80 94 Z' fill='%23FFFFFF'/><path d='M35 60 L65 94 L80 94 L50 60 Z' fill='%23F04D79'/></svg>" alt="Mother photo">
-                <div class="camera-badge-circle" onclick="sakhiApp.showToast('Upload photo from device camera or gallery')">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round">
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                    <circle cx="12" cy="13" r="4"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <!-- Full Name (Full width) -->
+            <h2 class="form-section-title">Register Pregnancy</h2>
+            <p class="form-helper-text">This creates a pregnancy record for an existing household beneficiary ID. Mother demographic details are maintained in the existing household register.</p>
             <div class="form-group-block">
-              <label class="form-field-label">Full Name</label>
-              <input type="text" id="motherFormName" class="form-input-box" placeholder="e.g. Lakshmi Nandhana" required>
+              <label class="form-field-label" for="motherFormBeneficiaryId">Household / Beneficiary ID</label>
+              <input type="text" id="motherFormBeneficiaryId" class="form-input-box" placeholder="Enter existing beneficiary ID" required>
             </div>
-
-            <!-- Age | DOB | Phone Number (3 fields row) -->
-            <div class="form-fields-row-3">
-              <div class="form-field-col">
-                <label class="form-field-label">Age</label>
-                <input type="number" id="motherFormAge" class="form-input-box" placeholder="30">
-              </div>
-              <div class="form-field-col">
-                <label class="form-field-label">DOB</label>
-                <input type="text" id="motherFormDOB" class="form-input-box" placeholder="DD/MM/YYYY">
-              </div>
-              <div class="form-field-col flex-2">
-                <label class="form-field-label">Phone Number</label>
-                <input type="tel" id="motherFormPhone" class="form-input-box" placeholder="1234567891">
-              </div>
-            </div>
-
-            <!-- Address (Full width) -->
-            <div class="form-group-block">
-              <label class="form-field-label">Address</label>
-              <input type="text" id="motherFormAddress" class="form-input-box" placeholder="Village / Ward Address">
-            </div>
-
-            <!-- Due Date | Weight | Iron Tablets (3 fields row) -->
-            <div class="form-fields-row-3">
-              <div class="form-field-col">
-                <label class="form-field-label">Due Date</label>
-                <input type="text" id="motherFormDueDate" class="form-input-box" placeholder="28 Sep 2024">
-              </div>
-              <div class="form-field-col">
-                <label class="form-field-label">Weight</label>
-                <input type="text" id="motherFormWeight" class="form-input-box" placeholder="55 kg">
-              </div>
-              <div class="form-field-col flex-2 input-with-plus-wrap">
-                <label class="form-field-label">Iron Tablets</label>
-                <div class="input-relative-wrap">
-                  <input type="text" id="motherFormIron" class="form-input-box" placeholder="Regular">
-                  <button type="button" class="field-inside-plus-btn" onclick="sakhiApp.showToast('Log iron tablets dosage/schedule')">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <line x1="12" y1="8" x2="12" y2="16"/>
-                      <line x1="8" y1="12" x2="16" y2="12"/>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Blood Group | More Details Button -->
             <div class="form-fields-row-2">
-              <div class="form-field-col flex-1">
-                <label class="form-field-label">Blood Group</label>
-                <input type="text" id="motherFormBlood" class="form-input-box" placeholder="O+">
+              <div class="form-field-col">
+                <label class="form-field-label" for="motherFormWeek">Gestational Week</label>
+                <input type="number" min="1" max="45" id="motherFormWeek" class="form-input-box" placeholder="e.g. 24" required>
               </div>
-              <div class="form-field-col flex-2 flex-align-end">
-                <button type="button" class="btn-more-details-pink" onclick="sakhiApp.showToast('Opening clinical history and ANC records...')">More Details</button>
+              <div class="form-field-col">
+                <label class="form-field-label" for="motherFormDueDate">Expected Delivery Date</label>
+                <input type="date" id="motherFormDueDate" class="form-input-box" required>
               </div>
             </div>
-
-            <!-- Save Prominent Pink Button -->
             <div class="form-submit-wrap">
-              <button type="submit" class="btn-full-pink btn-save-action">Save</button>
+              <button type="submit" class="btn-full-pink btn-save-action">Save Pregnancy Record</button>
             </div>
           </form>
         </div>
@@ -1224,7 +1162,7 @@
                   </div>
                 </div>
                 <div class="profile-details-column">
-                  <h2 class="profile-name" id="childDetailName">Rohan Kumar</h2>
+                  <h2 class="profile-name" id="childDetailName">Child Details</h2>
                   <p class="profile-meta-line" id="childDetailMeta">Age : 8 months : Male</p>
                   <p class="profile-phone-line" id="childDetailPhone">Phone Number :1234567891</p>
                   <div class="profile-badges-row">
@@ -1321,67 +1259,42 @@
           </header>
 
           <form class="form-body-content" id="babyProfileForm" onsubmit="sakhiApp.handleSaveBaby(event)">
-            <!-- Baby Avatar with Camera Badge -->
-            <div class="form-avatar-picker-wrap">
-              <div class="form-avatar-circle circle-baby-form">
-                <img id="babyFormAvatarImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23EDF2FE'/><circle cx='50' cy='42' r='20' fill='%23F6BE97'/><circle cx='43' cy='40' r='2' fill='%231F2937'/><circle cx='57' cy='40' r='2' fill='%231F2937'/><path d='M46 48 Q50 52 54 48' stroke='%23C2410C' stroke-width='2' stroke-linecap='round' fill='none'/><path d='M30 84 C30 64 70 64 70 84 Z' fill='%23FBBF24'/></svg>" alt="Baby photo">
-                <div class="camera-badge-circle" onclick="sakhiApp.showToast('Upload photo from device camera or gallery')">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round">
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                    <circle cx="12" cy="13" r="4"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <!-- Full Name (Full width) -->
+            <h2 class="form-section-title">Register Child</h2>
+            <p class="form-helper-text">A child must be linked to an existing household beneficiary ID. Dates must be supplied in DD-MM-YYYY format.</p>
             <div class="form-group-block">
-              <label class="form-field-label">Full Name</label>
-              <input type="text" id="babyFormName" class="form-input-box" placeholder="e.g. Rohan Kumar" required>
+              <label class="form-field-label" for="babyFormBeneficiaryId">Household / Beneficiary ID</label>
+              <input type="text" id="babyFormBeneficiaryId" class="form-input-box" placeholder="Enter existing beneficiary ID" required>
             </div>
-
-            <!-- Gender | DOB | Phone Number (3 fields row) -->
-            <div class="form-fields-row-3">
-              <div class="form-field-col">
-                <label class="form-field-label">Gender</label>
-                <input type="text" id="babyFormGender" class="form-input-box" placeholder="Male">
-              </div>
-              <div class="form-field-col">
-                <label class="form-field-label">DOB</label>
-                <input type="text" id="babyFormDOB" class="form-input-box" placeholder="DD/MM/YYYY">
-              </div>
-              <div class="form-field-col flex-2">
-                <label class="form-field-label">Phone Number</label>
-                <input type="tel" id="babyFormPhone" class="form-input-box" placeholder="1234567891">
-              </div>
-            </div>
-
-            <!-- Address (Full width) -->
             <div class="form-group-block">
-              <label class="form-field-label">Address</label>
-              <input type="text" id="babyFormAddress" class="form-input-box" placeholder="Village / Ward Address">
+              <label class="form-field-label" for="babyFormName">Child Name</label>
+              <input type="text" id="babyFormName" class="form-input-box" placeholder="Child full name" required>
             </div>
-
-            <!-- Parent/Gardian Name (Full width) -->
-            <div class="form-group-block">
-              <label class="form-field-label">Parent/Gardian Name</label>
-              <input type="text" id="babyFormGuardian" class="form-input-box" placeholder="e.g. Suresh Kumar">
-            </div>
-
-            <!-- Blood Group | More Details Button -->
             <div class="form-fields-row-2">
-              <div class="form-field-col flex-1">
-                <label class="form-field-label">Blood Group</label>
-                <input type="text" id="babyFormBlood" class="form-input-box" placeholder="B+">
+              <div class="form-field-col">
+                <label class="form-field-label" for="babyFormGender">Gender (M/F)</label>
+                <select id="babyFormGender" class="form-input-box" required>
+                  <option value="">Select gender</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                </select>
               </div>
-              <div class="form-field-col flex-2 flex-align-end">
-                <button type="button" class="btn-more-details-purple" onclick="sakhiApp.showToast('Opening birth weight, APGAR score & immunization history...')">More Details</button>
+              <div class="form-field-col">
+                <label class="form-field-label" for="babyFormDOB">Date of Birth</label>
+                <input type="text" id="babyFormDOB" class="form-input-box" placeholder="DD-MM-YYYY" required>
               </div>
             </div>
-
-            <!-- Save Prominent Purple Button -->
+            <div class="form-fields-row-2">
+              <div class="form-field-col">
+                <label class="form-field-label" for="babyFormWeight">Weight (kg)</label>
+                <input type="number" min="0.1" step="0.01" id="babyFormWeight" class="form-input-box" placeholder="e.g. 3.2" required>
+              </div>
+              <div class="form-field-col">
+                <label class="form-field-label" for="babyFormNextVisit">Next Visit (DD-MM-YYYY)</label>
+                <input type="text" id="babyFormNextVisit" class="form-input-box" placeholder="DD-MM-YYYY" required>
+              </div>
+            </div>
             <div class="form-submit-wrap">
-              <button type="submit" class="btn-full-purple btn-save-action">Save</button>
+              <button type="submit" class="btn-full-purple btn-save-action">Save Child Record</button>
             </div>
           </form>
         </div>
@@ -1453,41 +1366,6 @@
               </div>
             </div>
 
-            <!-- Demo Pre-loaded message matching screenshot -->
-            <div class="chat-row user-row">
-              <div class="bubble-avatar-mini user-mini-avatar">
-                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23D4F4E4'/><circle cx='50' cy='38' r='18' fill='%23F4B58A'/><path d='M30 36 C30 20 70 20 70 36 C70 48 64 54 64 54 L36 54 Z' fill='%231F2937'/><path d='M20 94 C24 64 38 60 50 60 C62 60 76 64 80 94 Z' fill='%23FFFFFF'/><path d='M35 60 L65 94 L80 94 L50 60 Z' fill='%23F04D79'/></svg>" alt="ASHA Worker">
-              </div>
-              <div class="chat-bubble user-bubble">
-                <p class="bubble-text">A pregnant women missed her iron tablets.what should i do?</p>
-                <div class="bubble-meta">
-                  <span class="bubble-time">09:32 AM</span>
-                  <span class="bubble-ticks">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5"><polyline points="18 6 9 17 4 12"/><polyline points="22 10 13 21 8 16"/></svg>
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Bot Response matching screenshot -->
-            <div class="chat-row bot-row">
-              <div class="bubble-avatar-mini bot-mini-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#2B66FF">
-                  <rect x="5" y="7" width="14" height="12" rx="4"/>
-                  <circle cx="9" cy="12" r="1.2" fill="#FFFFFF"/>
-                  <circle cx="15" cy="12" r="1.2" fill="#FFFFFF"/>
-                  <path d="M9 15h6" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="chat-bubble bot-bubble">
-                <p class="bubble-text">Iron tablets help prevent anemia in pregnant women. Encourage her to take it daily after food. If she feels symptoms like dizziness, weakness or nausea, suggest her to consult a doctor.</p>
-                <div class="bubble-meta">
-                  <span class="bubble-time">09:32 AM</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <!-- Bottom Floating Input Bar -->
           <div class="chat-bottom-input-bar">
             <div class="chat-input-pill">
@@ -1553,17 +1431,17 @@
               <!-- Top Profile Card -->
               <div class="worker-card-white">
                 <div class="worker-avatar-circle">
-                  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23DCE7FE'/><circle cx='50' cy='36' r='20' fill='%23F4B58A'/><path d='M30 32 C30 18 70 18 70 32 C70 42 66 48 66 48 L34 48 Z' fill='%231F2937'/><path d='M22 92 C24 66 38 58 50 58 C62 58 76 66 78 92 Z' fill='%232B66FF'/><path d='M44 58 L56 58 L54 78 L46 78 Z' fill='%23FFFFFF'/></svg>" alt="Arunima Raj">
+                  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23DCE7FE'/><circle cx='50' cy='36' r='20' fill='%23F4B58A'/><path d='M30 32 C30 18 70 18 70 32 C70 42 66 48 66 48 L34 48 Z' fill='%231F2937'/><path d='M22 92 C24 66 38 58 50 58 C62 58 76 66 78 92 Z' fill='%232B66FF'/><path d='M44 58 L56 58 L54 78 L46 78 Z' fill='%23FFFFFF'/></svg>" alt="ASHA Worker">
                 </div>
                 <div class="worker-info-column">
-                  <h2 class="worker-name" id="workerProfileName">Arunima Raj</h2>
+                  <h2 class="worker-name" id="workerProfileName">ASHA Worker</h2>
                   <div class="worker-meta-row">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    <span id="workerProfilePhone">9876543210</span>
+                    <span id="workerProfilePhone">Not available</span>
                   </div>
                   <div class="worker-meta-row">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <span id="workerProfileLocation">Bangalore, Karnataka</span>
+                    <span id="workerProfileLocation">Not available</span>
                   </div>
                   <div class="worker-edit-wrap">
                     <button class="btn-worker-edit" onclick="sakhiApp.showToast('Profile editing enabled for ASHA field worker')">Edit</button>
@@ -1594,7 +1472,7 @@
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </span>
                     <span class="details-label">Full Name</span>
-                    <span class="details-value">ASHA Worker</span>
+                    <span class="details-value" id="workerProfileFullName">Not available</span>
                   </div>
 
                   <div class="details-row">
@@ -1602,7 +1480,7 @@
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     </span>
                     <span class="details-label">Email Address</span>
-                    <span class="details-value">asha.worker@gmail.com</span>
+                    <span class="details-value" id="workerProfileEmail">Not available</span>
                   </div>
 
                   <div class="details-row">
@@ -1610,7 +1488,7 @@
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                     </span>
                     <span class="details-label">Phone Number</span>
-                    <span class="details-value">9876543210</span>
+                    <span class="details-value" id="workerProfilePhoneOverview">Not available</span>
                   </div>
 
                   <div class="details-row">
@@ -1618,7 +1496,7 @@
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                     </span>
                     <span class="details-label">Date of Birth</span>
-                    <span class="details-value">12 Jan 1995</span>
+                    <span class="details-value" id="workerProfileDob">Not available</span>
                   </div>
 
                   <div class="details-row">
@@ -1626,7 +1504,7 @@
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     </span>
                     <span class="details-label">Address</span>
-                    <span class="details-value">Bangalore, Karnataka</span>
+                    <span class="details-value" id="workerProfileAddress">Not available</span>
                   </div>
                 </div>
               </div>
@@ -1939,6 +1817,16 @@
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
 
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const apiParam = params.get("api");
+      if (apiParam) {
+        localStorage.setItem("SAKHI_API_BASE", apiParam.replace(/\/+$/, ""));
+      }
+      window.SAKHI_API_BASE = localStorage.getItem("SAKHI_API_BASE") || window.SAKHI_API_BASE || "";
+    })();
+  </script>
   <script src="app.js"></script>
 </body>
 </html>
