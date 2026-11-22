@@ -4593,9 +4593,10 @@ def get_all_logins():
 def login(mobile, password):
     try:
         conn = get_conn()
+        clean_mobile = str(mobile).strip()
         row = conn.execute(
-            "SELECT * FROM asha_workers WHERE mobile=?",
-            (mobile,),
+            "SELECT * FROM asha_workers WHERE mobile=? OR mobile LIKE ?",
+            (clean_mobile, f"{clean_mobile}%"),
         ).fetchone()
         if row is None:
             return {"success": False, "message": "Mobile number not found", "user": None}
