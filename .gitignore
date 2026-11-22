@@ -3,6 +3,16 @@
 .venv-workers/
 venv/
 env/
+<<<<<<< HEAD
+=======
+.env
+
+# Audio and temporary test files
+*.wav
+*.webm
+*.ogg
+*.m4a
+>>>>>>> 053f8ff (Initial commit with project files)
 
 # Python cache & artifacts
 __pycache__/
@@ -25,3 +35,19 @@ yarn-debug.log*
 Thumbs.db
 .vscode/
 .idea/
+<<<<<<< HEAD
+=======
+
+# Duplicate/backup files from sync
+api_link.py
+frontend/*_1.js
+frontend/*_1.html
+frontend/*_1.css
+public/*_1.js
+public/*_1.html
+public/*_1.css
+src/asha_data.db
+src/gnani_service.py
+src/translation_service.py
+src/vacs.json
+>>>>>>> 053f8ff (Initial commit with project files)

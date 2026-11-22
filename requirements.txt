@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 fastapi>=0.115.0
 uvicorn[standard]>=0.30.0
 pydantic>=2.7.0
 pandas>=2.2.0
 python-multipart>=0.0.9
+=======
+fastapi>=0.110
+uvicorn[standard]>=0.27
+python-multipart>=0.0.9
+pydantic>=2.6
+pandas>=2.0
+numpy>=1.24
+requests>=2.31
+python-dotenv>=1.0
+>>>>>>> 053f8ff (Initial commit with project files)

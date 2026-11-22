@@ -1,0 +1,31 @@
+# Ignore Python virtual environments
+.venv/
+.venv-workers/
+venv/
+env/
+
+# Ignore git directory
+.git/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore compiled artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore data files that should not be in image
+asha_data.db
+src/asha_data.db
+
+# Ignore local test/audio files
+*.wav
+*.webm
+*.ogg
+*.m4a
+
+# Ignore node modules (if any)
+node_modules/

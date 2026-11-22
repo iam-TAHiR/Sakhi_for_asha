@@ -4573,3 +4573,52 @@ button {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
 }
+<<<<<<< HEAD
+=======
+
+/* Voice Visit Action & Recording States */
+.btn-voice-visit.recording-active {
+  background-color: #FEE2E2 !important;
+  color: #DC2626 !important;
+  border: 1px solid #EF4444 !important;
+  animation: pulse-voice-btn 1.2s infinite ease-in-out !important;
+}
+
+@keyframes pulse-voice-btn {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+}
+
+.visit-voice-note-pill {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  background: #EEF2FF;
+  border-left: 3px solid #4F46E5;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #312E81;
+}
+
+.voice-note-pill-label {
+  font-weight: 700;
+  color: #4338CA;
+  margin-right: 0.25rem;
+}
+
+.voice-note-pill-text {
+  color: #1E1B4B;
+}
+
+.voice-note-pill-sub {
+  font-size: 0.6875rem;
+  color: #6B7280;
+  margin-top: 0.2rem;
+  font-style: italic;
+}
+>>>>>>> 053f8ff (Initial commit with project files)

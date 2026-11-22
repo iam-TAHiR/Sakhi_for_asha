@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import os
 import requests
@@ -65,11 +66,74 @@ def _google_translate_fallback(text: str) -> str:
     except Exception as e:
         print(f"  [Google Translate fallback] Error: {e}")
     return text  # Return original if everything fails
+=======
+"""Translate ASHA field-worker transcripts into English.
+
+Gemini is tried first when GEMINI_API_KEY is configured. Google Translate's
+public endpoint is used as a best-effort fallback. No API key is required at
+module import time, so the FastAPI app can still start if translation is not
+configured.
+"""
+from __future__ import annotations
+import os
+from pathlib import Path
+import requests
+from dotenv import load_dotenv
+
+_env_path = Path(__file__).resolve().parent / ".env"
+if not _env_path.is_file():
+    _env_path = Path(__file__).resolve().parent / "env"
+load_dotenv(_env_path)
+GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
+DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
+
+
+def _call_gemini(prompt: str, timeout: int = 20) -> str | None:
+    key = os.getenv("GEMINI_API_KEY")
+    if not key:
+        return None
+    models_to_try = [
+        os.getenv("GEMINI_MODEL", DEFAULT_MODEL),
+        "gemini-3.5-flash",
+        "gemini-3.5-flash-lite",
+        "gemini-flash-latest",
+        "gemini-3.8-flash",
+    ]
+    seen = set()
+    models = [m for m in models_to_try if m and not (m in seen or seen.add(m))]
+    for model in models:
+        url = GEMINI_API_URL.format(model=model, key=key)
+        payload = {"contents": [{"parts": [{"text": prompt}]}],
+                   "generationConfig": {"temperature": 0.1}}
+        try:
+            resp = requests.post(url, json=payload, timeout=timeout)
+            if resp.status_code == 200:
+                data = resp.json()
+                return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+            print(f"[translation_service] Gemini ({model}) HTTP {resp.status_code}: {resp.text[:200]}")
+        except Exception as exc:
+            print(f"[translation_service] Gemini ({model}) error: {exc}")
+    return None
+
+
+def _google_translate_fallback(text: str) -> str:
+    try:
+        resp = requests.get("https://translate.googleapis.com/translate_a/single",
+                            params={"client": "gtx", "sl": "auto", "tl": "en", "dt": "t", "q": text}, timeout=12)
+        resp.raise_for_status()
+        result = resp.json()
+        translated = "".join(segment[0] for segment in result[0] if segment and segment[0])
+        return translated.strip() or text
+    except Exception as exc:
+        print(f"[translation_service] Google fallback error: {exc}")
+        return text
+>>>>>>> 053f8ff (Initial commit with project files)
 
 
 def translate_to_english(transcript: str) -> str:
     if not transcript or not transcript.strip():
         return ""
+<<<<<<< HEAD
 
     prompt = f"""Translate the following ASHA healthcare field-worker voice transcript into clear English.
 
@@ -93,4 +157,16 @@ Transcript:
 
     # All Gemini models failed — use Google Translate as fallback
     print("[translation_service] All Gemini models busy. Using Google Translate fallback...")
+=======
+    prompt = f"""Translate this ASHA healthcare field-worker voice transcript into clear English.
+Preserve names, beneficiary IDs, numbers, dates, measurements and medical terms exactly.
+Do not summarize, omit details, or invent facts. If already English, return it with only obvious transcription cleanup.
+Return only the translated text.
+
+Transcript:
+{transcript}"""
+    translated = _call_gemini(prompt)
+    if translated:
+        return translated
+>>>>>>> 053f8ff (Initial commit with project files)
     return _google_translate_fallback(transcript)
